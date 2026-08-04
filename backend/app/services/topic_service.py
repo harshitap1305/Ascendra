@@ -187,3 +187,48 @@ async def recalculate_completion(topic_id: PydanticObjectId) -> None:
     # Bubble up to parent
     if topic.parent_id:
         await recalculate_completion(topic.parent_id)
+
+
+# ── Module 2 helpers ─────────────────────────────────────────────────────────
+
+async def get_topic_subtree(topic_id: PydanticObjectId) -> list[dict]:
+    """
+    Return a topic's direct subtopics as plain dicts for the PlannerContext.
+    Uses the ancestors index to get all descendants in one query.
+    """
+    descendants = await Topic.find({"ancestors": topic_id}).to_list()
+    return [
+        {
+            "name": t.name,
+            "depth": t.depth,
+            "difficulty": t.difficulty,
+            "estimated_hours": t.estimated_hours,
+            "weightage": t.weightage,
+            "status": t.status,
+        }
+        for t in descendants
+    ]
+
+
+async def get_exam_completion_pct(exam_id: PydanticObjectId) -> float:
+    """
+    Compute overall exam completion % from leaf topics.
+    Returns 0.0 if no topics exist yet.
+    """
+    pipeline = [
+        {"$match": {"exam_id": exam_id, "is_leaf": True}},
+        {
+            "$group": {
+                "_id": None,
+                "total": {"$sum": 1},
+                "completed": {
+                    "$sum": {"$cond": [{"$eq": ["$status", "completed"]}, 1, 0]}
+                },
+            }
+        },
+    ]
+    results = await Topic.aggregate(pipeline).to_list()
+    if not results:
+        return 0.0
+    row = results[0]
+    return round(row["completed"] / row["total"] * 100, 2) if row["total"] else 0.0

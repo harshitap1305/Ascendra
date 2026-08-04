@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { examService } from '../../services'
 import AppLayout from '../../layouts/AppLayout'
 import TopicTree from '../../components/TopicTree'
@@ -47,12 +47,19 @@ export default function ExamDashboardPage() {
           )}
         </div>
         <div className="flex gap-3">
+          <Link
+            to={`/exams/${examId}/modules`}
+            className="btn-secondary text-sm"
+          >
+            📋 Modules
+          </Link>
           <button
             onClick={() => navigate(`/exams/${examId}/syllabus`)}
             className="btn-secondary text-sm"
           >
             Edit Syllabus
           </button>
+
           {!allEnriched && (
             <button
               id="enrich-btn"

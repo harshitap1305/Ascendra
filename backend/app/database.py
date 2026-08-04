@@ -10,6 +10,14 @@ from app.models.topic import Topic
 from app.models.raw_syllabus import RawSyllabusUpload
 from app.models.resource import Resource
 from app.models.ai_interaction import AIInteraction
+from app.models.module_start import ModuleStart
+from app.models.module_plan import ModulePlan
+from app.models.module_plan_day import ModulePlanDay
+from app.models.module_resource import ModuleResource
+from app.models.daily_plan import DailyPlan
+from app.models.daily_report import DailyReport
+from app.models.study_log import StudyLog
+from app.models.feedback import Feedback
 
 _client: AsyncIOMotorClient | None = None
 
@@ -26,6 +34,14 @@ async def init_db() -> None:
             RawSyllabusUpload,
             Resource,
             AIInteraction,
+            ModuleStart,
+            ModulePlan,
+            ModulePlanDay,
+            ModuleResource,
+            DailyPlan,
+            DailyReport,
+            StudyLog,
+            Feedback,
         ],
     )
 

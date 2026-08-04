@@ -1,11 +1,11 @@
 import asyncio
 import json
 from pathlib import Path
-from pydantic import ValidationError
 from beanie import PydanticObjectId
 
 from app.schemas.ai_syllabus import EnrichedTopicsResponse, EnrichedTopicNode
 from app.services.ai.client import call_groq, HEAVY_MODEL
+from app.services.ai.validation import validate_with_retry
 from app.models.topic import Topic
 
 _PROMPT_PATH = Path(__file__).parent / "prompts" / "difficulty_estimator.txt"
@@ -42,19 +42,8 @@ async def _enrich_chunk(
         f"Exam type context: {experience_level}\n\n"
         f"Topics to enrich:\n{json.dumps(chunk_payload, indent=2)}"
     )
-
     raw = await call_groq(SYSTEM_PROMPT, user_msg, model=HEAVY_MODEL)
-
-    try:
-        return EnrichedTopicsResponse.model_validate(json.loads(raw))
-    except (json.JSONDecodeError, ValidationError) as e:
-        retry_msg = (
-            f"{user_msg}\n\n"
-            f"Your previous response failed schema validation:\n{e}\n"
-            f"Return ONLY corrected JSON matching the required schema exactly."
-        )
-        raw = await call_groq(SYSTEM_PROMPT, retry_msg, model=HEAVY_MODEL)
-        return EnrichedTopicsResponse.model_validate(json.loads(raw))
+    return await validate_with_retry(raw, EnrichedTopicsResponse, SYSTEM_PROMPT, user_msg, HEAVY_MODEL)
 
 
 async def _apply_enrichment(

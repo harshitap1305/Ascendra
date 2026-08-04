@@ -11,6 +11,7 @@ python-multipart
 groq
 tenacity
 python-dotenv
+apscheduler>=3.10
 pytest
 pytest-asyncio
 httpx

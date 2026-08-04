@@ -5,13 +5,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.database import init_db, close_db
 from app.api.routes import auth, exams, syllabus, resources
+from app.api.routes.modules import router as modules_router, exam_modules_router
+from app.api.routes.daily import router as daily_router
+from app.services.scheduler import start_scheduler, stop_scheduler
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Startup: connect to MongoDB Atlas + init Beanie. Shutdown: close connection."""
+    """Startup: connect to MongoDB Atlas + init Beanie + start APScheduler. Shutdown: clean up."""
     await init_db()
+    start_scheduler()
     yield
+    stop_scheduler()
     await close_db()
 
 
@@ -35,6 +40,9 @@ app.include_router(auth.router, prefix="/api")
 app.include_router(exams.router, prefix="/api")
 app.include_router(syllabus.router, prefix="/api")
 app.include_router(resources.router, prefix="/api")
+app.include_router(modules_router, prefix="/api")
+app.include_router(exam_modules_router, prefix="/api")
+app.include_router(daily_router, prefix="/api")
 
 
 @app.get("/health")
