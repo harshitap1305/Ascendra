@@ -50,3 +50,34 @@ export const dailyService = {
   listForModule: (moduleId) => api.get(`/daily/modules/${moduleId}/daily-plans`),
   feedbackHistory: (examId) => api.get(`/daily/exams/${examId}/feedback-history`),
 }
+
+export const analyticsService = {
+  // Dashboard
+  getDashboard: (examId) => api.get(`/exams/${examId}/dashboard`).then(r => r.data),
+  getHoursTimeline: (examId, days = 30) =>
+    api.get(`/exams/${examId}/stats/hours-timeline`, { params: { days } }).then(r => r.data),
+  getTopicCompletion: (examId) =>
+    api.get(`/exams/${examId}/stats/topic-completion`).then(r => r.data),
+  // Weekly reviews
+  listWeeklyReviews: (examId) => api.get(`/exams/${examId}/weekly-reviews`).then(r => r.data),
+  generateWeeklyReview: (examId, body = {}) =>
+    api.post(`/exams/${examId}/weekly-review`, body).then(r => r.data),
+  // Monthly reviews
+  listMonthlyReviews: (examId) => api.get(`/exams/${examId}/monthly-reviews`).then(r => r.data),
+  generateMonthlyReview: (examId, body = {}) =>
+    api.post(`/exams/${examId}/monthly-review`, body).then(r => r.data),
+  // Revision queue
+  getRevisionQueue: (examId) => api.get(`/exams/${examId}/revision-queue`).then(r => r.data),
+  getUpcomingRevisions: (examId) =>
+    api.get(`/exams/${examId}/revision-queue/upcoming`).then(r => r.data),
+  completeRevision: (revisionId, confidence_rating = null) =>
+    api.post(`/revisions/${revisionId}/complete`, { confidence_rating }).then(r => r.data),
+  requestReRevision: (revisionId) =>
+    api.post(`/revisions/${revisionId}/re-revision`).then(r => r.data),
+  skipRevision: (revisionId) =>
+    api.post(`/revisions/${revisionId}/skip`).then(r => r.data),
+  // Confidence
+  logConfidence: (topicId, rating, context = 'module_complete') =>
+    api.post(`/topics/${topicId}/confidence`, { rating, context }).then(r => r.data),
+}
+

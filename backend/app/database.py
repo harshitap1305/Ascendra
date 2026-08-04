@@ -18,6 +18,10 @@ from app.models.daily_plan import DailyPlan
 from app.models.daily_report import DailyReport
 from app.models.study_log import StudyLog
 from app.models.feedback import Feedback
+from app.models.weekly_review import WeeklyReview
+from app.models.monthly_review import MonthlyReview
+from app.models.revision_schedule import RevisionSchedule
+from app.models.confidence_log import ConfidenceLog
 
 _client: AsyncIOMotorClient | None = None
 
@@ -42,6 +46,10 @@ async def init_db() -> None:
             DailyReport,
             StudyLog,
             Feedback,
+            WeeklyReview,
+            MonthlyReview,
+            RevisionSchedule,
+            ConfidenceLog,
         ],
     )
 

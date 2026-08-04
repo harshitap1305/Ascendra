@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { dailyService } from '../../services'
+import { dailyService, analyticsService } from '../../services'
 import AppLayout from '../../layouts/AppLayout'
+import RevisionCard from '../../components/RevisionCard'
 
 const TYPE_CONFIG = {
   study: { icon: '📖', label: 'Study', color: 'text-blue-400' },
@@ -20,6 +21,13 @@ export default function TodayPage() {
     queryKey: ['today-plan', moduleId],
     queryFn: () => dailyService.getToday(moduleId).then((r) => r.data),
     retry: 1,
+  })
+
+  const { data: revisionQueue = [] } = useQuery({
+    queryKey: ['revision-queue', examId],
+    queryFn: () => analyticsService.getRevisionQueue(examId),
+    staleTime: 30_000,
+    enabled: !!examId,
   })
 
   const skipMutation = useMutation({
@@ -123,6 +131,20 @@ export default function TodayPage() {
           )
         })}
       </div>
+
+      {/* Today's Revisions Section */}
+      {revisionQueue.length > 0 && (
+        <div className="mb-8">
+          <p className="text-xs font-semibold uppercase tracking-wider mb-3 text-emerald-400">
+            🔄 Today's Revisions ({revisionQueue.length} due)
+          </p>
+          <div className="space-y-3">
+            {revisionQueue.map((r) => (
+              <RevisionCard key={r.id} revision={r} examId={examId} />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Actions */}
       {!isCompleted && !isSkipped && (

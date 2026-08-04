@@ -26,6 +26,7 @@ from app.services.ai.client import HEAVY_MODEL
 from app.services.ai.logging_wrapper import log_ai_call
 from app.services import replanning_service
 from app.services.topic_service import recalculate_completion
+from app.services import revision_service  # Module 4 — spaced revision hook
 
 
 # ── Pipeline A — Daily Plan Generation ───────────────────────────────────────
@@ -237,11 +238,14 @@ async def process_checkin(
             ).insert()
             topic_ids_updated.add(topic.id)
 
-    # Bubble up completion to ancestors
+    # Bubble up completion to ancestors + trigger Module 4 revision scheduling
     for topic_id in topic_ids_updated:
         topic = await Topic.get(topic_id)
         if topic and topic.parent_id:
             await recalculate_completion(topic.parent_id)
+        # Module 4 hook: when a leaf topic completes, schedule spaced revisions
+        if topic and topic.is_leaf and topic.status == "completed":
+            await revision_service.schedule_revisions_for_topic(topic)
 
     # ── Stage 4: Update module_plan_day status ──────────────────────────────
     plan_day = await ModulePlanDay.get(daily_plan.module_plan_day_id)

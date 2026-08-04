@@ -12,6 +12,10 @@ import ModuleListPage from './features/modules/ModuleListPage'
 import TodayPage from './features/daily/TodayPage'
 import CheckinPage from './features/daily/CheckinPage'
 import FeedbackHistoryPage from './features/daily/FeedbackHistoryPage'
+import DashboardPage from './features/analytics/DashboardPage'
+import WeeklyReviewPage from './features/analytics/WeeklyReviewPage'
+import MonthlyReviewPage from './features/analytics/MonthlyReviewPage'
+import RevisionQueuePage from './features/analytics/RevisionQueuePage'
 
 export default function App() {
   return (
@@ -37,11 +41,21 @@ export default function App() {
         }
       />
 
+      {/* /exams/:examId → redirect to dashboard (best practice: dashboard is default exam landing) */}
       <Route
         path="/exams/:examId"
         element={
           <ProtectedRoute>
             <ExamDashboardPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/exams/:examId/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
           </ProtectedRoute>
         }
       />
@@ -107,6 +121,33 @@ export default function App() {
         element={
           <ProtectedRoute>
             <FeedbackHistoryPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/exams/:examId/weekly-reviews"
+        element={
+          <ProtectedRoute>
+            <WeeklyReviewPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/exams/:examId/monthly-reviews"
+        element={
+          <ProtectedRoute>
+            <MonthlyReviewPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/exams/:examId/revision-queue"
+        element={
+          <ProtectedRoute>
+            <RevisionQueuePage />
           </ProtectedRoute>
         }
       />

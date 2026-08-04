@@ -48,6 +48,12 @@ export default function ExamDashboardPage() {
         </div>
         <div className="flex gap-3">
           <Link
+            to={`/exams/${examId}/dashboard`}
+            className="btn-primary text-sm"
+          >
+            📊 Dashboard
+          </Link>
+          <Link
             to={`/exams/${examId}/modules`}
             className="btn-secondary text-sm"
           >
