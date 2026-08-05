@@ -29,6 +29,9 @@ _client: AsyncIOMotorClient | None = None
 async def init_db() -> None:
     global _client
     _client = AsyncIOMotorClient(settings.MONGODB_URI)
+    # Shim for Beanie v2+ driver metadata call on Motor clients where append_metadata doesn't exist
+    if not hasattr(_client, "append_metadata"):
+        setattr(_client, "append_metadata", lambda *args, **kwargs: None)
     await init_beanie(
         database=_client[settings.DATABASE_NAME],
         document_models=[

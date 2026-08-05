@@ -2,3 +2,7 @@
 backend/app/__pycache__
 __pycache__
 backend/.env
+venv
+.venv
+backend/.venv
+.pytest_cache

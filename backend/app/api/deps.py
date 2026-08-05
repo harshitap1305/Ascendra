@@ -1,3 +1,4 @@
+from typing import Annotated
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError
@@ -21,6 +22,9 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
     if user is None:
         raise UnauthorizedError("User not found")
     return user
+
+
+CurrentUser = Annotated[User, Depends(get_current_user)]
 
 
 async def get_exam_for_user(
