@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { dailyService, analyticsService } from '../../services'
@@ -22,6 +22,33 @@ export default function TodayPage() {
     queryFn: () => dailyService.getToday(moduleId).then((r) => r.data),
     retry: 1,
   })
+
+  const [checkedTasks, setCheckedTasks] = useState({})
+
+  useEffect(() => {
+    if (plan?.id) {
+      try {
+        const saved = JSON.parse(localStorage.getItem(`checked_tasks_${plan.id}`)) || {}
+        setCheckedTasks(saved)
+      } catch {
+        setCheckedTasks({})
+      }
+    }
+  }, [plan?.id])
+
+  const toggleTask = (taskKey) => {
+    setCheckedTasks((prev) => {
+      const next = { ...prev, [taskKey]: !prev[taskKey] }
+      if (plan?.id) {
+        try {
+          localStorage.setItem(`checked_tasks_${plan.id}`, JSON.stringify(next))
+        } catch {
+          // Ignore localStorage errors
+        }
+      }
+      return next
+    })
+  }
 
   const { data: revisionQueue = [] } = useQuery({
     queryKey: ['revision-queue', examId],
@@ -114,18 +141,49 @@ export default function TodayPage() {
                 {cfg.icon} {cfg.label}
               </p>
               <div className="space-y-2">
-                {tasks.map((task, i) => (
-                  <div key={i} className="card py-3 px-4 flex items-start gap-3">
-                    <div className="w-5 h-5 rounded border border-slate-600 flex-shrink-0 mt-0.5" />
-                    <div className="flex-1">
-                      <p className="text-white text-sm">{task.description}</p>
-                      {task.resource_detail && (
-                        <p className="text-slate-500 text-xs mt-0.5">{task.resource_detail}</p>
-                      )}
+                {tasks.map((task, i) => {
+                  const taskKey = `${type}-${i}-${task.description}`
+                  const isChecked = isCompleted || !!checkedTasks[taskKey]
+                  return (
+                    <div
+                      key={taskKey}
+                      onClick={() => toggleTask(taskKey)}
+                      className={`card py-3 px-4 flex items-start gap-3 cursor-pointer transition-all duration-200 hover:border-slate-600 select-none ${
+                        isChecked ? 'bg-slate-900/40 border-emerald-500/30' : ''
+                      }`}
+                    >
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleTask(taskKey)
+                        }}
+                        className={`w-5 h-5 rounded border flex items-center justify-center flex-shrink-0 mt-0.5 transition-all ${
+                          isChecked
+                            ? 'bg-emerald-500 border-emerald-500 text-white shadow-sm shadow-emerald-500/30'
+                            : 'border-slate-600 bg-slate-800/80 hover:border-slate-400'
+                        }`}
+                      >
+                        {isChecked && <span className="text-xs font-bold leading-none">✓</span>}
+                      </button>
+                      <div className="flex-1">
+                        <p className={`text-sm transition-colors ${isChecked ? 'text-slate-400 line-through' : 'text-white font-medium'}`}>
+                          {task.description}
+                        </p>
+                        {task.resource_detail && (
+                          <p className={`text-xs mt-0.5 ${isChecked ? 'text-slate-600' : 'text-slate-400'}`}>
+                            {task.resource_detail}
+                          </p>
+                        )}
+                      </div>
+                      <span className={`text-xs shrink-0 font-mono px-2 py-0.5 rounded ${
+                        isChecked ? 'bg-slate-800/50 text-slate-500' : 'bg-slate-800 text-slate-300'
+                      }`}>
+                        {task.estimated_hours}h
+                      </span>
                     </div>
-                    <span className="text-slate-500 text-xs shrink-0">{task.estimated_hours}h</span>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           )

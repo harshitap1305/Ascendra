@@ -55,7 +55,7 @@ Ascendra is engineered with a scalable cloud-first architecture, uniting asynchr
 - **Backend Framework:** **FastAPI** (Python 3.10+) utilizing fully asynchronous concurrency (`async/await`) and Uvicorn ASGI servers.
 - **Database & ODM:** **MongoDB Atlas (Cloud)** paired with **Beanie ODM** (asynchronous ODM built over Motor and Pydantic).
 - **AI Infrastructure & Inference:** **Groq Cloud API** running open-source instruction-tuned models:
-  - `llama-3.1-70b-versatile`: Utilized for deep pedagogical reasoning, diagnostic feedback, and strategic study planning.
+  - `llama-3.3-70b-versatile`: Utilized for deep pedagogical reasoning, diagnostic feedback, and strategic study planning.
   - `llama-3.1-8b-instant`: Utilized for rapid JSON schema formatting and low-latency syllabus structuring.
 - **Frontend Web Application:** **React 19** powered by **Vite**, structured with **Tailwind CSS v4** (custom dark mode theme, glassmorphism, and micro-animations), and state-managed via **TanStack React Query v5** with automated Axios JWT interception.
 - **Data Visualization & Charting:** **Recharts** for interactive timeline graphs and topic completion bars, supplemented by custom native SVG components (Readiness Gauge & GitHub-style Heatmap).

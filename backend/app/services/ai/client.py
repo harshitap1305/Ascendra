@@ -10,7 +10,7 @@ from app.config import settings
 _client = AsyncGroq(api_key=settings.GROQ_API_KEY)
 
 # Model tiers — swap here for all agents at once if Groq releases better models
-HEAVY_MODEL = "llama-3.1-70b-versatile"   # parsing, planning, feedback
+HEAVY_MODEL = "llama-3.3-70b-versatile"   # parsing, planning, feedback
 LIGHT_MODEL = "llama-3.1-8b-instant"       # daily tasks, progress extraction
 
 
