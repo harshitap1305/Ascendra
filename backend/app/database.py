@@ -1,4 +1,5 @@
 from motor.motor_asyncio import AsyncIOMotorClient
+import certifi
 from beanie import init_beanie
 from app.config import settings
 
@@ -28,7 +29,10 @@ _client: AsyncIOMotorClient | None = None
 
 async def init_db() -> None:
     global _client
-    _client = AsyncIOMotorClient(settings.MONGODB_URI)
+    kwargs = {}
+    if "mongodb+srv://" in settings.MONGODB_URI or "tls=" in settings.MONGODB_URI or "ssl=" in settings.MONGODB_URI:
+        kwargs["tlsCAFile"] = certifi.where()
+    _client = AsyncIOMotorClient(settings.MONGODB_URI, **kwargs)
     # Shim for Beanie v2+ driver metadata call on Motor clients where append_metadata doesn't exist
     if not hasattr(_client, "append_metadata"):
         setattr(_client, "append_metadata", lambda *args, **kwargs: None)
