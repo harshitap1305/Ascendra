@@ -5,7 +5,7 @@ import {
 function statusColor(status) {
   if (status === 'completed') return '#10b981'
   if (status === 'in_progress') return '#f59e0b'
-  return '#334155'
+  return '#a5846c'
 }
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -32,28 +32,29 @@ export default function TopicCompletionBarChart({ data = [] }) {
 
   return (
     <div className="card">
-      <h3 className="text-sm font-semibold text-secondary mb-4">Topic-wise Progress</h3>
-      <ResponsiveContainer width="100%" height={Math.max(160, data.length * 36)}>
+      <h3 className="text-sm font-semibold text-secondary mb-4 uppercase tracking-wide">Topic-wise Progress</h3>
+      <ResponsiveContainer width="100%" height={Math.max(250, data.length * 45)}>
         <BarChart
           data={data}
           layout="vertical"
-          margin={{ top: 0, right: 8, left: 0, bottom: 0 }}
-          barSize={16}
+          margin={{ top: 0, right: 10, left: 10, bottom: 0 }}
+          barSize={18}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#541A1A" strokeOpacity={0.2} horizontal={false} />
           <XAxis
             type="number" domain={[0, 100]}
-            tick={{ fill: '#64748b', fontSize: 11 }}
+            tick={{ fill: '#541A1A', fontSize: 11, fontWeight: 'bold' }}
             axisLine={false} tickLine={false}
             tickFormatter={v => `${v}%`}
           />
           <YAxis
             type="category" dataKey="topic_name"
-            tick={{ fill: '#94a3b8', fontSize: 11 }}
+            tick={{ fill: '#541A1A', fontSize: 11, fontWeight: 'bold' }}
             axisLine={false} tickLine={false}
-            width={110}
+            width={130}
+            tickFormatter={(name) => name.length > 22 ? name.substring(0, 22) + '...' : name}
           />
-          <Tooltip content={<CustomTooltip />} cursor={{ fill: '#1e293b' }} />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(84, 26, 26, 0.05)' }} />
           <Bar dataKey="completion_pct" radius={[0, 4, 4, 0]}>
             {data.map((entry, i) => (
               <Cell key={i} fill={statusColor(entry.status)} />
@@ -62,10 +63,10 @@ export default function TopicCompletionBarChart({ data = [] }) {
         </BarChart>
       </ResponsiveContainer>
       {/* Legend */}
-      <div className="flex gap-4 mt-3 justify-end text-xs text-secondary/70">
-        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />Completed</span>
-        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block" />In Progress</span>
-        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-600 inline-block" />Not Started</span>
+      <div className="flex gap-4 mt-4 justify-end text-xs text-secondary font-bold">
+        <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-[#10b981] border-2 border-secondary" />Completed</span>
+        <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-[#f59e0b] border-2 border-secondary" />In Progress</span>
+        <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-[#a5846c] border-2 border-secondary" />Not Started</span>
       </div>
     </div>
   )
