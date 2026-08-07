@@ -65,9 +65,9 @@ async def get_active_module_summary(exam_id: PydanticObjectId) -> Optional[Activ
         "plan_date": date.today(),
     })
     return ActiveModuleSummary(
-        module_name=ms.module_name or "",
+        module_name=f"Module: {topic.name}" if topic else "Active Module",
         topic_name=topic.name if topic else "",
-        day_number=today_plan.module_plan_day_id and 1,  # simplified — exact day_number via plan
+        day_number=1,  # simplified for now
         total_days=plan.total_days if plan else 0,
         module_completion_pct=topic.completion_pct if topic else 0.0,
         status=ms.status,
