@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
+import { Book, Flame, Calendar, Clock, Target, BookOpen, RefreshCw, CheckCircle2, AlertTriangle, Timer, ClipboardList } from 'lucide-react'
 import { analyticsService } from '../../services'
 import AppLayout from '../../layouts/AppLayout'
 import ReadinessGauge from '../../components/ReadinessGauge'
@@ -94,7 +95,7 @@ export default function DashboardPage() {
               )}
               {tl?.on_track != null && (
                 <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${tl.on_track ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'}`}>
-                  {tl.on_track ? '✓ On Track' : '⚠ Behind Pace'}
+                  {tl.on_track ? <span className="flex items-center gap-1"><CheckCircle2 size={14} /> On Track</span> : <span className="flex items-center gap-1"><AlertTriangle size={14} /> Behind Pace</span>}
                 </span>
               )}
             </div>
@@ -111,8 +112,8 @@ export default function DashboardPage() {
                 </span>
               </Link>
             )}
-            <Link to={`/exams/${examId}/weekly-reviews`} className="btn-secondary text-sm">
-              📋 Weekly Review
+            <Link to={`/exams/${examId}/weekly-reviews`} className="btn-secondary text-sm flex items-center gap-1.5">
+              <ClipboardList size={14} /> Weekly Review
             </Link>
           </div>
         </div>
@@ -131,13 +132,13 @@ export default function DashboardPage() {
           <StatCard
             label="Overall Progress"
             value={`${overall?.completion_pct ?? 0}%`}
-            icon="📚"
+            icon={<Book size={20} />}
             subtext={`${overall?.completed_leaf_topics ?? 0} / ${overall?.total_leaf_topics ?? 0} topics`}
           />
           <StatCard
             label="Study Streak"
             value={`${perf?.current_streak_days ?? 0} days`}
-            icon="🔥"
+            icon={<Flame size={20} />}
             subtext={`Best: ${perf?.longest_streak_days ?? 0} days`}
             trend={perf?.current_streak_days > 0 ? 'Active' : undefined}
             trendUp={true}
@@ -145,25 +146,25 @@ export default function DashboardPage() {
           <StatCard
             label="Consistency"
             value={`${perf?.consistency_score ?? 0}%`}
-            icon="📅"
+            icon={<Calendar size={20} />}
             subtext="Last 30 days"
           />
           <StatCard
             label="Avg Daily Hours"
             value={perf?.avg_daily_hours_14d ? `${perf.avg_daily_hours_14d}h` : '—'}
-            icon="⏱"
+            icon={<Clock size={20} />}
             subtext="14-day rolling avg"
           />
           <StatCard
             label="Total Hours"
             value={`${perf?.total_hours_studied ?? 0}h`}
-            icon="📖"
+            icon={<BookOpen size={20} />}
             subtext="All time studied"
           />
           <StatCard
             label="Required Daily"
             value={tl?.required_daily_hours ? `${tl.required_daily_hours}h` : '—'}
-            icon="🎯"
+            icon={<Target size={20} />}
             subtext="To finish before exam"
             trend={tl?.on_track === false ? 'Behind pace' : undefined}
             trendUp={false}
@@ -203,8 +204,8 @@ export default function DashboardPage() {
         {revisionQueue.length > 0 && (
           <div className="card">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-secondary">
-                🔄 Revisions Due ({revisionQueue.length})
+              <h3 className="text-sm font-semibold text-secondary flex items-center gap-2">
+                <RefreshCw size={16} /> Revisions Due ({revisionQueue.length})
               </h3>
               <Link
                 to={`/exams/${examId}/revision-queue`}
@@ -257,7 +258,7 @@ export default function DashboardPage() {
               : 'bg-amber-500/10 border-amber-500/30'
           }`}>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-lg">{tl.on_track ? '✅' : '⏳'}</span>
+              <span className="text-lg">{tl.on_track ? <CheckCircle2 size={20} className="text-emerald-500" /> : <Timer size={20} className="text-amber-500" />}</span>
               <span className="text-secondary">
                 At your current pace ({perf?.avg_daily_hours_14d ?? '?'}h/day), you'll finish on{' '}
                 <span className="font-semibold text-secondary">{tl.projected_finish_date}</span>

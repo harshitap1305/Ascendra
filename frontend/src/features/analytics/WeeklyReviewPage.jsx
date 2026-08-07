@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { AlertTriangle, Calendar, Target } from 'lucide-react'
 import { analyticsService } from '../../services'
 import AppLayout from '../../layouts/AppLayout'
 
 function ToneTag({ tone }) {
   const map = {
-    encouraging: { label: '🌟 Encouraging', cls: 'badge-low' },
-    urgent: { label: '⚠ Urgent', cls: 'badge-high' },
+    encouraging: { label: 'Encouraging', cls: 'badge-low' },
+    urgent: { label: <><AlertTriangle size={14} className="inline mr-1" /> Urgent</>, cls: 'badge-high' },
     balanced: { label: '⚖ Balanced', cls: 'badge-medium' },
   }
   const t = map[tone] || map.balanced
@@ -110,7 +111,7 @@ export default function WeeklyReviewPage() {
                 {/* Projected finish */}
                 {r.projected_finish_date && (
                   <div className="text-xs text-secondary/70">
-                    📅 Projected finish: <span className="text-secondary font-medium">{r.projected_finish_date}</span>
+                    <div className="flex items-center gap-1.5"><Calendar size={16} /> Projected finish: <span className="text-secondary font-medium">{r.projected_finish_date}</span></div>
                     {r.days_remaining_exam && ` · ${r.days_remaining_exam} days until exam`}
                   </div>
                 )}
@@ -133,7 +134,7 @@ export default function WeeklyReviewPage() {
                     )}
                     {r.weak_topics?.length > 0 && (
                       <div>
-                        <p className="text-amber-400 text-xs font-semibold mb-2">⚠ Needs Attention</p>
+                        <p className="text-amber-400 text-xs font-semibold mb-2 flex items-center gap-1.5"><AlertTriangle size={14} /> Needs Attention</p>
                         <div className="space-y-1">
                           {r.weak_topics.map((t, i) => (
                             <div key={i} className="text-xs">
@@ -155,7 +156,7 @@ export default function WeeklyReviewPage() {
                 {/* Key recommendation */}
                 {r.key_recommendation && (
                   <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg p-3">
-                    <p className="text-indigo-300 text-xs font-semibold mb-1">🎯 Key Action for Next Week</p>
+                    <p className="text-indigo-300 text-xs font-semibold mb-1 flex items-center gap-1.5"><Target size={14} /> Key Action for Next Week</p>
                     <p className="text-secondary text-sm">{r.key_recommendation}</p>
                   </div>
                 )}

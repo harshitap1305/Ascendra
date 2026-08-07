@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { BookOpen, PenTool, RefreshCw, CornerUpLeft, CheckCircle2, Clock, AlertCircle } from 'lucide-react'
 import { dailyService, analyticsService } from '../../services'
 import AppLayout from '../../layouts/AppLayout'
 import RevisionCard from '../../components/RevisionCard'
 
 const TYPE_CONFIG = {
-  study: { icon: '📖', label: 'Study', color: 'text-blue-400' },
-  practice: { icon: '✏️', label: 'Practice', color: 'text-purple-400' },
-  revision: { icon: '🔄', label: 'Revision', color: 'text-emerald-400' },
-  carry_over: { icon: '↩️', label: 'Carry-over', color: 'text-amber-400' },
+  study: { icon: <BookOpen size={16} />, label: 'Study', color: 'text-blue-400' },
+  practice: { icon: <PenTool size={16} />, label: 'Practice', color: 'text-purple-400' },
+  revision: { icon: <RefreshCw size={16} />, label: 'Revision', color: 'text-emerald-400' },
+  carry_over: { icon: <CornerUpLeft size={16} />, label: 'Carry-over', color: 'text-amber-400' },
 }
 
 export default function TodayPage() {
@@ -78,7 +79,7 @@ export default function TodayPage() {
     return (
       <AppLayout>
         <div className="card text-center py-16">
-          <p className="text-3xl mb-3">🎉</p>
+          <CalendarDays className="mx-auto mb-3 text-secondary/30" size={48} />
           <p className="text-secondary font-semibold text-lg">No plan scheduled for today</p>
           <p className="text-secondary/70 text-sm mt-2">Your module window has ended, or you've completed all planned days!</p>
           <button
@@ -111,12 +112,12 @@ export default function TodayPage() {
           )}
         </div>
         <div className="flex items-center gap-2">
-          <span className={`text-xs px-3 py-1 rounded-full font-medium border
+          <span className={`text-xs px-3 py-1 rounded-full font-medium border flex items-center gap-1.5
             ${isCompleted ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
               : isSkipped ? 'bg-slate-600/40 text-secondary/70 border-secondary'
               : 'bg-amber-500/20 text-amber-400 border-amber-500/30'}`}
           >
-            {isCompleted ? '✓ Completed' : isSkipped ? 'Skipped' : '⏳ In Progress'}
+            {isCompleted ? <><CheckCircle2 size={14} /> Completed</> : isSkipped ? 'Skipped' : <><Clock size={14} /> In Progress</>}
           </span>
           <span className="text-secondary/70 text-sm">{plan.planned_hours}h planned</span>
         </div>
@@ -125,9 +126,9 @@ export default function TodayPage() {
       {/* Carry-over notice */}
       {plan.carry_over_tasks?.length > 0 && (
         <div className="mb-4 p-3 rounded-lg border border-amber-500/30 bg-amber-500/10">
-          <p className="text-amber-400 text-sm font-medium">
-            ↩️ {plan.carry_over_tasks.length} task(s) carried over from yesterday
-          </p>
+          <div className="flex items-center gap-2 text-amber-400 text-sm font-medium">
+            <CornerUpLeft size={16} /> {plan.carry_over_tasks.length} task(s) carried over from yesterday
+          </div>
         </div>
       )}
 
@@ -212,7 +213,7 @@ export default function TodayPage() {
             onClick={() => navigate(`/exams/${examId}/modules/${moduleId}/checkin`)}
             className="btn-primary flex-1"
           >
-            ✏️ Submit Check-in
+            <PenTool size={18} className="inline mr-2" /> Submit Check-in
           </button>
           <button
             id="skip-today-btn"

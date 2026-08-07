@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { AlertTriangle, Target, CalendarDays, Zap } from 'lucide-react'
 import { analyticsService } from '../../services'
 import AppLayout from '../../layouts/AppLayout'
 
@@ -129,7 +130,7 @@ export default function MonthlyReviewPage() {
                     )}
                     {r.weak_topics?.length > 0 && (
                       <div>
-                        <p className="text-amber-400 text-xs font-semibold mb-2">⚠ Focus Next Month</p>
+                        <p className="text-amber-400 text-xs font-semibold mb-2 flex items-center gap-1.5"><AlertTriangle size={14} /> Focus Next Month</p>
                         <div className="flex flex-wrap gap-2">
                           {r.weak_topics.map((t, i) => (
                             <span key={i} className="badge-medium text-xs" title={t.reason}>{t.name}</span>
@@ -146,7 +147,7 @@ export default function MonthlyReviewPage() {
 
                 {r.key_recommendation && (
                   <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg p-3">
-                    <p className="text-indigo-300 text-xs font-semibold mb-1">🎯 Priority for Next Month</p>
+                    <p className="text-indigo-300 text-xs font-semibold mb-1 flex items-center gap-1.5"><Target size={14} /> Priority for Next Month</p>
                     <p className="text-secondary text-sm">{r.key_recommendation}</p>
                   </div>
                 )}

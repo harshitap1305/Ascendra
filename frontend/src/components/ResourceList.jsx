@@ -1,9 +1,11 @@
+import { Video, BookOpen, PenTool, RefreshCw, Link as LinkIcon } from 'lucide-react'
+
 const RESOURCE_ICONS = {
-  video: '🎬',
-  book: '📖',
-  practice: '✏️',
-  revision: '🔄',
-  other: '🔗',
+  video: <Video size={16} />,
+  book: <BookOpen size={16} />,
+  practice: <PenTool size={16} />,
+  revision: <RefreshCw size={16} />,
+  other: <LinkIcon size={16} />
 }
 
 const RESOURCE_LABELS = {

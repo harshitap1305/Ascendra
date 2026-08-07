@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { Frown, Meh, Smile, SmilePlus, Target } from 'lucide-react'
 import { analyticsService } from '../services'
 
 const CONFIDENCE_LABELS = ['', 'Confused', 'Shaky', 'Okay', 'Good', 'Nailed it!']
@@ -94,7 +95,7 @@ export default function RevisionCard({ revision, examId }) {
                     : 'border-secondary text-secondary/70 hover:border-slate-500'
                 }`}
               >
-                <span className="text-base">{r === 1 ? '😕' : r === 2 ? '😐' : r === 3 ? '🙂' : r === 4 ? '😊' : '🎯'}</span>
+                <span className="text-base flex items-center justify-center">{r === 1 ? <Frown size={16} /> : r === 2 ? <Meh size={16} /> : r === 3 ? <Smile size={16} /> : r === 4 ? <SmilePlus size={16} /> : <Target size={16} />}</span>
                 <span>{CONFIDENCE_LABELS[r]}</span>
               </button>
             ))}

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import { Book } from 'lucide-react'
 import { examService } from '../../services'
 import AppLayout from '../../layouts/AppLayout'
 import ExamCard from './ExamCard'
@@ -38,7 +39,7 @@ export default function ExamListPage() {
 
       {data?.length === 0 && (
         <div className="card text-center py-20">
-          <p className="text-4xl mb-4">📚</p>
+          <div className="flex justify-center text-secondary mb-4"><Book size={40} /></div>
           <p className="text-secondary font-medium text-lg">No exams yet</p>
           <p className="text-secondary/70 text-sm mt-1 mb-6">Create your first exam to get started</p>
           <Link to="/exams/new" className="btn-primary inline-block">

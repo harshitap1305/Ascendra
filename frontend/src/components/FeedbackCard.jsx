@@ -1,8 +1,10 @@
+import { AlertTriangle } from 'lucide-react'
+
 const PACE_CONFIG = {
   ahead:    { color: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', label: '↑ Ahead of Plan' },
   on_track: { color: 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30',   label: '✓ On Track' },
   behind:   { color: 'bg-amber-500/20 text-amber-400 border-amber-500/30',       label: '↓ Behind Plan' },
-  at_risk:  { color: 'bg-red-500/20 text-red-400 border-red-500/30',             label: '⚠ At Risk' },
+  at_risk:  { color: 'bg-red-500/20 text-red-400 border-red-500/30',             label: <><AlertTriangle size={14} className="inline mr-1" /> At Risk</> },
 }
 
 const RISK_DOT = {

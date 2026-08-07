@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { Rocket } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import { examService, moduleService } from '../../services'
 import AppLayout from '../../layouts/AppLayout'
@@ -178,7 +179,7 @@ export default function ModuleStartPage() {
                 disabled={submitting || !selectedTopic || rawInput.trim().length < 10}
                 className="btn-primary w-full"
               >
-                {submitting ? 'Starting…' : '🚀 Generate Master Plan'}
+                {submitting ? 'Starting…' : <><Rocket size={18} className="inline mr-2" /> Generate Master Plan</>}
               </button>
             </div>
           </form>

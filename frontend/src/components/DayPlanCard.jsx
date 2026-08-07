@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Video, BookOpen, PenTool, RefreshCw, Link as LinkIcon, Clock, Target, Book, LayoutList } from 'lucide-react'
 
 const STATUS_STYLES = {
   pending: 'bg-slate-700/50 text-secondary/70 border-secondary',
@@ -7,7 +8,13 @@ const STATUS_STYLES = {
   adjusted: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
 }
 
-const RESOURCE_ICONS = { video: '🎬', book: '📖', practice: '✏️', revision: '🔄', other: '🔗' }
+const RESOURCE_ICONS = { 
+  video: <Video size={14} />, 
+  book: <BookOpen size={14} />, 
+  practice: <PenTool size={14} />, 
+  revision: <RefreshCw size={14} />, 
+  other: <LinkIcon size={14} /> 
+}
 
 export default function DayPlanCard({ day, editable = false, onUpdate }) {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -61,7 +68,7 @@ export default function DayPlanCard({ day, editable = false, onUpdate }) {
               onClick={(e) => { if (editable) { e.stopPropagation(); setEditingHours(true) } }}
               title={editable ? "Click to edit hours" : ""}
             >
-              ⏱ {day.planned_hours}h
+              <Clock size={14} className="inline mr-1" /> {day.planned_hours}h
             </button>
           )}
           <span className="text-xs capitalize px-2 py-0.5 rounded-full bg-current/10 opacity-70">
@@ -76,14 +83,14 @@ export default function DayPlanCard({ day, editable = false, onUpdate }) {
         <div className="px-4 pb-4 border-t border-current/20 pt-3 space-y-3">
           {day.goals && (
             <div className="bg-indigo-500/5 border border-indigo-500/20 rounded-lg px-3 py-2">
-              <p className="text-xs font-semibold text-indigo-400 mb-1">🎯 Today's Goal</p>
+              <p className="text-xs font-semibold text-indigo-400 mb-1 flex items-center gap-1.5"><Target size={14} /> Today's Goal</p>
               <p className="text-sm text-secondary">{day.goals}</p>
             </div>
           )}
 
           {day.focus_topics.length > 0 && (
             <div>
-              <p className="text-xs font-semibold text-secondary/70 mb-1.5">📚 Topics to cover</p>
+              <p className="text-xs font-semibold text-secondary/70 mb-1.5 flex items-center gap-1.5"><Book size={14} /> Topics to cover</p>
               <div className="flex flex-wrap gap-1.5">
                 {day.focus_topics.map((t, i) => (
                   <span key={i} className="text-xs bg-tan border border-secondary text-secondary px-2 py-0.5 rounded-full">

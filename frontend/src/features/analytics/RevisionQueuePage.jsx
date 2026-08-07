@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { CheckCircle2, BookOpen } from 'lucide-react'
 import { analyticsService } from '../../services'
 import AppLayout from '../../layouts/AppLayout'
 import RevisionCard from '../../components/RevisionCard'
@@ -41,7 +42,7 @@ export default function RevisionQueuePage() {
           </div>
         ) : queue.length === 0 ? (
           <div className="card text-center py-12">
-            <p className="text-4xl mb-3">✅</p>
+            <p className="mb-3 text-emerald-500"><CheckCircle2 size={40} className="mx-auto" /></p>
             <h3 className="text-secondary font-semibold mb-2">All caught up!</h3>
             <p className="text-secondary/70 text-sm">No revisions due today. Keep studying and revisions will appear here when topics are due.</p>
           </div>
@@ -100,7 +101,7 @@ export default function RevisionQueuePage() {
 
         {/* How spaced repetition works */}
         <div className="mt-8 card bg-tan/50">
-          <h3 className="text-secondary text-sm font-semibold mb-2">📖 How Spaced Repetition Works</h3>
+          <h3 className="text-secondary text-sm font-semibold mb-2 flex items-center gap-1.5"><BookOpen size={16} /> How Spaced Repetition Works</h3>
           <p className="text-secondary/70 text-xs leading-relaxed">
             When you complete a topic, we automatically schedule 5 revision sessions at increasing intervals:
             <span className="text-secondary/70"> 1 day → 3 days → 7 days → 15 days → 30 days.</span>

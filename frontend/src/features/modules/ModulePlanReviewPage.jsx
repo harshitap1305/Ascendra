@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { CheckCircle2, Calendar, AlertTriangle, Package, RefreshCw } from 'lucide-react'
 import { moduleService } from '../../services'
 import AppLayout from '../../layouts/AppLayout'
 import DayPlanCard from '../../components/DayPlanCard'
@@ -85,7 +86,7 @@ export default function ModulePlanReviewPage() {
                 disabled={retryMutation.isPending}
                 className="btn-secondary text-sm"
               >
-                {retryMutation.isPending ? 'Retrying…' : '🔄 Retry Plan'}
+                {retryMutation.isPending ? 'Retrying…' : <><RefreshCw size={18} className="inline mr-2" /> Retry Plan</>}
               </button>
             )}
             {isPlanReady && !plan.is_accepted && (
@@ -95,7 +96,7 @@ export default function ModulePlanReviewPage() {
                 disabled={acceptMutation.isPending}
                 className="btn-primary text-sm"
               >
-                {acceptMutation.isPending ? 'Accepting…' : '✅ Accept Plan'}
+                {acceptMutation.isPending ? 'Accepting…' : <><CheckCircle2 size={18} className="inline mr-2" /> Accept Plan</>}
               </button>
             )}
             {plan?.is_accepted && (
@@ -107,7 +108,7 @@ export default function ModulePlanReviewPage() {
                   to={`/exams/${examId}/modules/${moduleId}/today`}
                   className="btn-primary text-sm"
                 >
-                  📅 Today's Plan
+                  <Calendar size={18} className="inline mr-2" /> Today's Plan
                 </Link>
               </>
             )}
@@ -128,7 +129,7 @@ export default function ModulePlanReviewPage() {
         {isFailed && (
           <div className="card bg-red-500/5 border-red-500/30 mb-6">
             <div className="flex items-start gap-3">
-              <span className="text-2xl">⚠️</span>
+              <span className="text-amber-500"><AlertTriangle size={32} /></span>
               <div>
                 <p className="font-medium text-red-300">Plan generation failed</p>
                 {ms?.error_detail && (
@@ -156,7 +157,7 @@ export default function ModulePlanReviewPage() {
                       : 'text-secondary/70 hover:text-secondary'
                     }`}
                 >
-                  {tab === 'plan' ? `📅 Plan (${plan?.total_days || 0} days)` : `📦 Resources (${resources.length})`}
+                  {tab === 'plan' ? <span className="flex items-center gap-1.5"><Calendar size={16} /> Plan ({plan?.total_days || 0} days)</span> : <span className="flex items-center gap-1.5"><Package size={16} /> Resources ({resources.length})</span>}
                 </button>
               ))}
             </div>

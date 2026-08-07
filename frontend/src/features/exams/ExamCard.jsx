@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { Calendar, Clock } from 'lucide-react'
+
 
 const EXPERIENCE_LABELS = {
   beginner: 'Beginner',
@@ -40,8 +42,8 @@ export default function ExamCard({ exam }) {
       )}
 
       <div className="flex items-center gap-4 text-xs text-secondary/70 mt-auto pt-3 border-t border-secondary">
-        <span>📅 {daysLeft !== null ? `${daysLeft}d left` : 'No date set'}</span>
-        <span>⏱ {exam.daily_study_hours}h/day</span>
+        <span className="flex items-center gap-1.5"><Calendar size={14} /> {daysLeft !== null ? `${daysLeft}d left` : 'No date set'}</span>
+        <span className="flex items-center gap-1.5"><Clock size={14} /> {exam.daily_study_hours}h/day</span>
       </div>
     </Link>
   )

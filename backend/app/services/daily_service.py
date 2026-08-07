@@ -4,6 +4,7 @@ Pipeline A: generate_daily_plan / get_or_generate_today_plan
 Pipeline B: process_checkin (progress → study logs → pace → feedback → replanning)
 """
 import asyncio
+import re
 from datetime import date, datetime, timedelta, timezone
 from typing import Optional
 from beanie import PydanticObjectId
@@ -198,14 +199,20 @@ async def process_checkin(
     # Map task_ref → task dict for topic resolution
     task_map = {t["task_ref"]: t for t in daily_plan.tasks}
 
+    completed_tasks_list = [task_map[r.task_ref] for r in completed if r.task_ref in task_map]
+    pending_tasks_list = [task_map[r.task_ref] for r in pending if r.task_ref in task_map]
+    
+    inferred_hours = sum(t.get("estimated_hours", 0) for t in completed_tasks_list)
+    actual_hours = analysis.actual_hours_spent if analysis.actual_hours_spent is not None else inferred_hours
+
     report = DailyReport(
         daily_plan_id=daily_plan.id,
         module_start_id=daily_plan.module_start_id,
         plan_date=daily_plan.plan_date,
         raw_text=raw_text,
-        completed_tasks=[task_map[r.task_ref] for r in completed if r.task_ref in task_map],
-        pending_tasks=[task_map[r.task_ref] for r in pending if r.task_ref in task_map],
-        actual_hours=analysis.actual_hours_spent,
+        completed_tasks=completed_tasks_list,
+        pending_tasks=pending_tasks_list,
+        actual_hours=actual_hours,
         confidence_rating=analysis.confidence_rating,
         mood_note=analysis.mood_note,
         delay_reason=analysis.delay_reason,
@@ -423,13 +430,27 @@ async def _resolve_topic_by_name(
     topic_name: str,
     root_topic_id: PydanticObjectId,
 ) -> Optional[Topic]:
-    """Find a topic by name within the module's topic subtree."""
+    """Find a topic by name within the module's topic subtree, with flexible matching."""
     if not topic_name:
         return None
+    
+    # 1. Try an exact or semi-exact regex match ignoring non-alphanumerics
+    clean_name = re.sub(r'[^a-zA-Z0-9]+', '.*', topic_name.strip())
     topic = await Topic.find_one({
         "ancestors": root_topic_id,
-        "name": {"$regex": topic_name, "$options": "i"},
+        "name": {"$regex": clean_name, "$options": "i"},
     })
+    
+    # 2. If not found, try a looser match using significant words
+    if not topic:
+        words = [w for w in re.split(r'[^a-zA-Z0-9]+', topic_name) if len(w) > 3]
+        if words:
+            pattern = '.*'.join(words)
+            topic = await Topic.find_one({
+                "ancestors": root_topic_id,
+                "name": {"$regex": pattern, "$options": "i"},
+            })
+            
     return topic
 
 
