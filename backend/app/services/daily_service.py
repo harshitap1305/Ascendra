@@ -176,6 +176,7 @@ async def process_checkin(
     """
     module_start = await ModuleStart.get(daily_plan.module_start_id)
     exam = await Exam.get(module_start.exam_id)
+    plan = await ModulePlan.find_one(ModulePlan.module_start_id == module_start.id)
 
     # ── Stage 1: Progress Analysis ──────────────────────────────────────────
     async def _analyze():
