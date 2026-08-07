@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { BookOpen, PenTool, RefreshCw, CornerUpLeft, CheckCircle2, Clock, AlertCircle } from 'lucide-react'
+import { BookOpen, PenTool, RefreshCw, CornerUpLeft, CheckCircle2, Clock, AlertCircle, CalendarDays } from 'lucide-react'
 import { dailyService, analyticsService } from '../../services'
 import AppLayout from '../../layouts/AppLayout'
 import RevisionCard from '../../components/RevisionCard'

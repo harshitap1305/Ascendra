@@ -63,13 +63,13 @@ export default function DayPlanCard({ day, editable = false, onUpdate }) {
               autoFocus
             />
           ) : (
-            <button
+            <div
               className={`text-sm font-mono px-2 py-1 rounded ${editable ? 'hover:bg-white/10 cursor-pointer' : 'cursor-default'} transition-colors`}
               onClick={(e) => { if (editable) { e.stopPropagation(); setEditingHours(true) } }}
               title={editable ? "Click to edit hours" : ""}
             >
               <Clock size={14} className="inline mr-1" /> {day.planned_hours}h
-            </button>
+            </div>
           )}
           <span className="text-xs capitalize px-2 py-0.5 rounded-full bg-current/10 opacity-70">
             {day.status}
