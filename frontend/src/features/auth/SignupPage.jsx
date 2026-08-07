@@ -24,14 +24,14 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-cream flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="inline-flex w-12 h-12 bg-indigo-600 rounded-xl items-center justify-center font-bold text-xl mb-4">
             A
           </div>
-          <h1 className="text-2xl font-bold text-white">Start your journey</h1>
-          <p className="text-slate-400 mt-1 text-sm">Create your Ascendra account</p>
+          <h1 className="text-2xl font-bold text-secondary">Start your journey</h1>
+          <p className="text-secondary/70 mt-1 text-sm">Create your Ascendra account</p>
         </div>
 
         <form onSubmit={handleSubmit} className="card space-y-4">
@@ -89,7 +89,7 @@ export default function SignupPage() {
             {loading ? 'Creating account…' : 'Create account'}
           </button>
 
-          <p className="text-center text-sm text-slate-400">
+          <p className="text-center text-sm text-secondary/70">
             Already have an account?{' '}
             <Link to="/login" className="text-indigo-400 hover:text-indigo-300 font-medium">
               Sign in

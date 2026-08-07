@@ -66,15 +66,15 @@ export default function ModulePlanReviewPage() {
           <div>
             <button
               onClick={() => navigate(`/exams/${examId}/modules`)}
-              className="text-slate-500 hover:text-slate-300 text-sm mb-1 transition-colors"
+              className="text-secondary/70 hover:text-secondary text-sm mb-1 transition-colors"
             >
               ← All Modules
             </button>
-            <h1 className="text-2xl font-bold text-white">
+            <h1 className="text-2xl font-bold text-secondary">
               {isPlanReady ? `${plan.total_days}-Day Master Plan` : 'Module Plan'}
             </h1>
             {plan?.summary && (
-              <p className="text-slate-400 text-sm mt-1 max-w-xl">{plan.summary}</p>
+              <p className="text-secondary/70 text-sm mt-1 max-w-xl">{plan.summary}</p>
             )}
           </div>
           <div className="flex gap-3">
@@ -119,8 +119,8 @@ export default function ModulePlanReviewPage() {
           <div className="card flex items-center gap-4 py-8">
             <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin shrink-0" />
             <div>
-              <p className="text-white font-medium">Building your plan…</p>
-              <p className="text-slate-400 text-sm">AI is processing. This page updates automatically.</p>
+              <p className="text-secondary font-medium">Building your plan…</p>
+              <p className="text-secondary/70 text-sm">AI is processing. This page updates automatically.</p>
             </div>
           </div>
         )}
@@ -134,7 +134,7 @@ export default function ModulePlanReviewPage() {
                 {ms?.error_detail && (
                   <p className="text-sm text-red-400/80 mt-1">{ms.error_detail}</p>
                 )}
-                <p className="text-sm text-slate-400 mt-2">
+                <p className="text-sm text-secondary/70 mt-2">
                   Your resources were saved. Hit "Retry Plan" to regenerate without re-parsing resources.
                 </p>
               </div>
@@ -145,15 +145,15 @@ export default function ModulePlanReviewPage() {
         {/* Tabs */}
         {(isPlanReady || resources.length > 0) && (
           <>
-            <div className="flex gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1 mb-6 w-fit">
+            <div className="flex gap-1 bg-tan border border-secondary rounded-lg p-1 mb-6 w-fit">
               {['plan', 'resources'].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all
                     ${activeTab === tab
-                      ? 'bg-indigo-600 text-white'
-                      : 'text-slate-400 hover:text-slate-200'
+                      ? 'bg-indigo-600 text-secondary'
+                      : 'text-secondary/70 hover:text-secondary'
                     }`}
                 >
                   {tab === 'plan' ? `📅 Plan (${plan?.total_days || 0} days)` : `📦 Resources (${resources.length})`}
@@ -164,7 +164,7 @@ export default function ModulePlanReviewPage() {
             {/* Plan tab */}
             {activeTab === 'plan' && isPlanReady && (
               <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs text-slate-500 mb-4">
+                <div className="flex items-center justify-between text-xs text-secondary/70 mb-4">
                   <span>
                     {plan.total_days} days · {ms?.daily_hours_available}h/day budget
                     {ms?.expected_hours && ` · ~${ms.expected_hours}h total`}
@@ -187,7 +187,7 @@ export default function ModulePlanReviewPage() {
             {/* Resources tab */}
             {activeTab === 'resources' && (
               <div className="card">
-                <h2 className="font-semibold text-white mb-4">
+                <h2 className="font-semibold text-secondary mb-4">
                   Extracted Resources
                 </h2>
                 <ResourceList resources={resources} />

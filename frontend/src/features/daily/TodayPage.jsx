@@ -79,8 +79,8 @@ export default function TodayPage() {
       <AppLayout>
         <div className="card text-center py-16">
           <p className="text-3xl mb-3">🎉</p>
-          <p className="text-white font-semibold text-lg">No plan scheduled for today</p>
-          <p className="text-slate-400 text-sm mt-2">Your module window has ended, or you've completed all planned days!</p>
+          <p className="text-secondary font-semibold text-lg">No plan scheduled for today</p>
+          <p className="text-secondary/70 text-sm mt-2">Your module window has ended, or you've completed all planned days!</p>
           <button
             onClick={() => navigate(`/exams/${examId}/modules`)}
             className="btn-primary mt-6"
@@ -102,23 +102,23 @@ export default function TodayPage() {
       {/* Header */}
       <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
         <div>
-          <p className="text-slate-500 text-sm mb-1">
+          <p className="text-secondary/70 text-sm mb-1">
             {new Date(plan.plan_date).toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })}
           </p>
-          <h1 className="text-2xl font-bold text-white">Today's Plan</h1>
+          <h1 className="text-2xl font-bold text-secondary">Today's Plan</h1>
           {plan.daily_goal && (
-            <p className="text-slate-400 text-sm mt-1 italic">"{plan.daily_goal}"</p>
+            <p className="text-secondary/70 text-sm mt-1 italic">"{plan.daily_goal}"</p>
           )}
         </div>
         <div className="flex items-center gap-2">
           <span className={`text-xs px-3 py-1 rounded-full font-medium border
             ${isCompleted ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
-              : isSkipped ? 'bg-slate-600/40 text-slate-400 border-slate-600'
+              : isSkipped ? 'bg-slate-600/40 text-secondary/70 border-secondary'
               : 'bg-amber-500/20 text-amber-400 border-amber-500/30'}`}
           >
             {isCompleted ? '✓ Completed' : isSkipped ? 'Skipped' : '⏳ In Progress'}
           </span>
-          <span className="text-slate-400 text-sm">{plan.planned_hours}h planned</span>
+          <span className="text-secondary/70 text-sm">{plan.planned_hours}h planned</span>
         </div>
       </div>
 
@@ -148,8 +148,8 @@ export default function TodayPage() {
                     <div
                       key={taskKey}
                       onClick={() => toggleTask(taskKey)}
-                      className={`card py-3 px-4 flex items-start gap-3 cursor-pointer transition-all duration-200 hover:border-slate-600 select-none ${
-                        isChecked ? 'bg-slate-900/40 border-emerald-500/30' : ''
+                      className={`card py-3 px-4 flex items-start gap-3 cursor-pointer transition-all duration-200 hover:border-secondary select-none ${
+                        isChecked ? 'bg-tan/40 border-emerald-500/30' : ''
                       }`}
                     >
                       <button
@@ -160,24 +160,24 @@ export default function TodayPage() {
                         }}
                         className={`w-5 h-5 rounded border flex items-center justify-center flex-shrink-0 mt-0.5 transition-all ${
                           isChecked
-                            ? 'bg-emerald-500 border-emerald-500 text-white shadow-sm shadow-emerald-500/30'
-                            : 'border-slate-600 bg-slate-800/80 hover:border-slate-400'
+                            ? 'bg-emerald-500 border-emerald-500 text-secondary shadow-sm shadow-emerald-500/30'
+                            : 'border-secondary bg-tan/80 hover:border-slate-400'
                         }`}
                       >
                         {isChecked && <span className="text-xs font-bold leading-none">✓</span>}
                       </button>
                       <div className="flex-1">
-                        <p className={`text-sm transition-colors ${isChecked ? 'text-slate-400 line-through' : 'text-white font-medium'}`}>
+                        <p className={`text-sm transition-colors ${isChecked ? 'text-secondary/70 line-through' : 'text-secondary font-medium'}`}>
                           {task.description}
                         </p>
                         {task.resource_detail && (
-                          <p className={`text-xs mt-0.5 ${isChecked ? 'text-slate-600' : 'text-slate-400'}`}>
+                          <p className={`text-xs mt-0.5 ${isChecked ? 'text-slate-600' : 'text-secondary/70'}`}>
                             {task.resource_detail}
                           </p>
                         )}
                       </div>
                       <span className={`text-xs shrink-0 font-mono px-2 py-0.5 rounded ${
-                        isChecked ? 'bg-slate-800/50 text-slate-500' : 'bg-slate-800 text-slate-300'
+                        isChecked ? 'bg-tan/50 text-secondary/70' : 'bg-tan text-secondary'
                       }`}>
                         {task.estimated_hours}h
                       </span>
@@ -239,7 +239,7 @@ export default function TodayPage() {
 
       {isSkipped && (
         <div className="card py-4 text-center">
-          <p className="text-slate-400 text-sm">Day skipped — tasks carry over to tomorrow.</p>
+          <p className="text-secondary/70 text-sm">Day skipped — tasks carry over to tomorrow.</p>
         </div>
       )}
     </AppLayout>

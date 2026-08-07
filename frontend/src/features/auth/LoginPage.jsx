@@ -24,15 +24,15 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-cream flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex w-12 h-12 bg-indigo-600 rounded-xl items-center justify-center font-bold text-xl mb-4">
             A
           </div>
-          <h1 className="text-2xl font-bold text-white">Welcome back</h1>
-          <p className="text-slate-400 mt-1 text-sm">Sign in to continue your preparation</p>
+          <h1 className="text-2xl font-bold text-secondary">Welcome back</h1>
+          <p className="text-secondary/70 mt-1 text-sm">Sign in to continue your preparation</p>
         </div>
 
         <form onSubmit={handleSubmit} className="card space-y-4">
@@ -77,7 +77,7 @@ export default function LoginPage() {
             {loading ? 'Signing in…' : 'Sign in'}
           </button>
 
-          <p className="text-center text-sm text-slate-400">
+          <p className="text-center text-sm text-secondary/70">
             New here?{' '}
             <Link to="/signup" className="text-indigo-400 hover:text-indigo-300 font-medium">
               Create account

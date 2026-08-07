@@ -34,12 +34,12 @@ function TopicNode({ topic, readOnly, onUpdate, onDelete }) {
 
   return (
     <div className="my-1">
-      <div className="flex items-center justify-between group py-2 px-3 rounded-lg hover:bg-slate-800/50 border border-transparent hover:border-slate-800 transition-all">
+      <div className="flex items-center justify-between group py-2 px-3 rounded-lg hover:bg-tan/50 border border-transparent hover:border-secondary transition-all">
         <div className="flex items-center gap-2 flex-1 min-w-0">
           {hasChildren ? (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="w-5 h-5 flex items-center justify-center text-slate-400 hover:text-slate-200 focus:outline-none"
+              className="w-5 h-5 flex items-center justify-center text-secondary/70 hover:text-secondary focus:outline-none"
             >
               {isExpanded ? '▼' : '▶'}
             </button>
@@ -63,12 +63,12 @@ function TopicNode({ topic, readOnly, onUpdate, onDelete }) {
             </div>
           ) : (
             <div className="flex items-center gap-2 truncate flex-1">
-              <span className="font-medium text-slate-200 text-sm truncate">
+              <span className="font-medium text-secondary text-sm truncate">
                 {topic.name}
               </span>
               {getDifficultyBadge(topic.difficulty)}
               {topic.estimated_hours != null && (
-                <span className="text-xs text-slate-500 font-mono bg-slate-800/80 px-1.5 py-0.5 rounded">
+                <span className="text-xs text-secondary/70 font-mono bg-tan/80 px-1.5 py-0.5 rounded">
                   {topic.estimated_hours}h
                 </span>
               )}
@@ -86,7 +86,7 @@ function TopicNode({ topic, readOnly, onUpdate, onDelete }) {
             {!isEditing && (
               <button
                 onClick={() => setIsEditing(true)}
-                className="text-xs text-slate-400 hover:text-slate-200 px-2 py-1 rounded hover:bg-slate-700/50"
+                className="text-xs text-secondary/70 hover:text-secondary px-2 py-1 rounded hover:bg-slate-700/50"
               >
                 Edit
               </button>
@@ -102,7 +102,7 @@ function TopicNode({ topic, readOnly, onUpdate, onDelete }) {
       </div>
 
       {hasChildren && isExpanded && (
-        <div className="pl-6 border-l border-slate-800/80 ml-2.5 mt-1 space-y-1">
+        <div className="pl-6 border-l border-secondary/80 ml-2.5 mt-1 space-y-1">
           {topic.children.map((child) => (
             <TopicNode
               key={child.id}

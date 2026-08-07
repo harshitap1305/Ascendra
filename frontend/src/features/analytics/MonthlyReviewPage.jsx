@@ -27,11 +27,11 @@ export default function MonthlyReviewPage() {
       <div className="max-w-3xl mx-auto">
         <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
           <div>
-            <Link to={`/exams/${examId}/dashboard`} className="text-slate-500 hover:text-slate-300 text-sm mb-1 transition-colors block">
+            <Link to={`/exams/${examId}/dashboard`} className="text-secondary/70 hover:text-secondary text-sm mb-1 transition-colors block">
               ← Dashboard
             </Link>
-            <h1 className="text-2xl font-bold text-white">Monthly Reviews</h1>
-            <p className="text-slate-400 text-sm mt-1">Generated on the 1st of each month</p>
+            <h1 className="text-2xl font-bold text-secondary">Monthly Reviews</h1>
+            <p className="text-secondary/70 text-sm mt-1">Generated on the 1st of each month</p>
           </div>
           <button
             id="generate-monthly-btn"
@@ -50,8 +50,8 @@ export default function MonthlyReviewPage() {
         ) : reviews.length === 0 ? (
           <div className="card text-center py-12">
             <p className="text-4xl mb-3">📆</p>
-            <h3 className="text-slate-200 font-semibold mb-2">No monthly reviews yet</h3>
-            <p className="text-slate-500 text-sm mb-4">Reviews auto-generate on the 1st of each month, or generate one now.</p>
+            <h3 className="text-secondary font-semibold mb-2">No monthly reviews yet</h3>
+            <p className="text-secondary/70 text-sm mb-4">Reviews auto-generate on the 1st of each month, or generate one now.</p>
             <button onClick={() => generateMutation.mutate()} disabled={generateMutation.isPending} className="btn-primary text-sm mx-auto">
               Generate now
             </button>
@@ -62,12 +62,12 @@ export default function MonthlyReviewPage() {
               <div key={r.id} className="card space-y-4">
                 <div className="flex items-start justify-between flex-wrap gap-2">
                   <div>
-                    <h2 className="text-white font-bold text-xl">{MONTH_NAMES[r.month]} {r.year}</h2>
-                    <p className="text-slate-500 text-xs mt-0.5">{r.month_start_date} → {r.month_end_date}</p>
+                    <h2 className="text-secondary font-bold text-xl">{MONTH_NAMES[r.month]} {r.year}</h2>
+                    <p className="text-secondary/70 text-xs mt-0.5">{r.month_start_date} → {r.month_end_date}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-slate-400 text-xs">Overall progress</p>
-                    <p className="text-white font-bold text-lg">{r.exam_completion_pct?.toFixed(1)}%</p>
+                    <p className="text-secondary/70 text-xs">Overall progress</p>
+                    <p className="text-secondary font-bold text-lg">{r.exam_completion_pct?.toFixed(1)}%</p>
                   </div>
                 </div>
 
@@ -81,9 +81,9 @@ export default function MonthlyReviewPage() {
                     { label: 'Days Missed', value: r.skipped_days },
                     { label: 'Productivity', value: r.avg_productivity_pct != null ? `${r.avg_productivity_pct}%` : '—' },
                   ].map(s => (
-                    <div key={s.label} className="bg-slate-800/60 rounded-lg px-3 py-2">
-                      <p className="text-slate-500 text-xs">{s.label}</p>
-                      <p className={`font-bold text-base ${s.hi ? 'text-emerald-400' : 'text-white'}`}>{s.value}</p>
+                    <div key={s.label} className="bg-tan/60 rounded-lg px-3 py-2">
+                      <p className="text-secondary/70 text-xs">{s.label}</p>
+                      <p className={`font-bold text-base ${s.hi ? 'text-emerald-400' : 'text-secondary'}`}>{s.value}</p>
                     </div>
                   ))}
                 </div>
@@ -94,20 +94,20 @@ export default function MonthlyReviewPage() {
                     <div className="flex flex-wrap gap-4">
                       {r.projected_finish_date && (
                         <div>
-                          <p className="text-slate-500 text-xs">Projected finish</p>
-                          <p className="text-white font-semibold">{r.projected_finish_date}</p>
+                          <p className="text-secondary/70 text-xs">Projected finish</p>
+                          <p className="text-secondary font-semibold">{r.projected_finish_date}</p>
                         </div>
                       )}
                       {r.required_daily_hours && (
                         <div>
-                          <p className="text-slate-500 text-xs">Required daily hours</p>
-                          <p className="text-white font-semibold">{r.required_daily_hours}h</p>
+                          <p className="text-secondary/70 text-xs">Required daily hours</p>
+                          <p className="text-secondary font-semibold">{r.required_daily_hours}h</p>
                         </div>
                       )}
                       {r.days_remaining_exam && (
                         <div>
-                          <p className="text-slate-500 text-xs">Days to exam</p>
-                          <p className="text-white font-semibold">{r.days_remaining_exam}</p>
+                          <p className="text-secondary/70 text-xs">Days to exam</p>
+                          <p className="text-secondary font-semibold">{r.days_remaining_exam}</p>
                         </div>
                       )}
                     </div>
@@ -140,14 +140,14 @@ export default function MonthlyReviewPage() {
                   </div>
                 )}
 
-                <div className="border-t border-slate-800 pt-4">
-                  <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">{r.ai_summary}</p>
+                <div className="border-t border-secondary pt-4">
+                  <p className="text-secondary text-sm leading-relaxed whitespace-pre-line">{r.ai_summary}</p>
                 </div>
 
                 {r.key_recommendation && (
                   <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg p-3">
                     <p className="text-indigo-300 text-xs font-semibold mb-1">🎯 Priority for Next Month</p>
-                    <p className="text-slate-300 text-sm">{r.key_recommendation}</p>
+                    <p className="text-secondary text-sm">{r.key_recommendation}</p>
                   </div>
                 )}
               </div>

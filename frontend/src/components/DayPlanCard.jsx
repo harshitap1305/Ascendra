@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
 const STATUS_STYLES = {
-  pending: 'bg-slate-700/50 text-slate-400 border-slate-700',
+  pending: 'bg-slate-700/50 text-secondary/70 border-secondary',
   done: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
-  skipped: 'bg-slate-700/30 text-slate-500 border-slate-700',
+  skipped: 'bg-slate-700/30 text-secondary/70 border-secondary',
   adjusted: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
 }
 
@@ -33,11 +33,11 @@ export default function DayPlanCard({ day, editable = false, onUpdate }) {
             {day.day_number}
           </div>
           <div>
-            <p className="font-medium text-slate-200 text-sm">
+            <p className="font-medium text-secondary text-sm">
               {day.focus_topics.slice(0, 2).join(' · ')}
               {day.focus_topics.length > 2 && ` +${day.focus_topics.length - 2} more`}
             </p>
-            <p className="text-xs text-slate-500 mt-0.5">{day.planned_date}</p>
+            <p className="text-xs text-secondary/70 mt-0.5">{day.planned_date}</p>
           </div>
         </div>
         <div className="flex items-center gap-3 shrink-0">
@@ -67,7 +67,7 @@ export default function DayPlanCard({ day, editable = false, onUpdate }) {
           <span className="text-xs capitalize px-2 py-0.5 rounded-full bg-current/10 opacity-70">
             {day.status}
           </span>
-          <span className="text-slate-500 text-xs">{isExpanded ? '▲' : '▼'}</span>
+          <span className="text-secondary/70 text-xs">{isExpanded ? '▲' : '▼'}</span>
         </div>
       </button>
 
@@ -77,16 +77,16 @@ export default function DayPlanCard({ day, editable = false, onUpdate }) {
           {day.goals && (
             <div className="bg-indigo-500/5 border border-indigo-500/20 rounded-lg px-3 py-2">
               <p className="text-xs font-semibold text-indigo-400 mb-1">🎯 Today's Goal</p>
-              <p className="text-sm text-slate-300">{day.goals}</p>
+              <p className="text-sm text-secondary">{day.goals}</p>
             </div>
           )}
 
           {day.focus_topics.length > 0 && (
             <div>
-              <p className="text-xs font-semibold text-slate-400 mb-1.5">📚 Topics to cover</p>
+              <p className="text-xs font-semibold text-secondary/70 mb-1.5">📚 Topics to cover</p>
               <div className="flex flex-wrap gap-1.5">
                 {day.focus_topics.map((t, i) => (
-                  <span key={i} className="text-xs bg-slate-800 border border-slate-700 text-slate-300 px-2 py-0.5 rounded-full">
+                  <span key={i} className="text-xs bg-tan border border-secondary text-secondary px-2 py-0.5 rounded-full">
                     {t}
                   </span>
                 ))}
@@ -96,10 +96,10 @@ export default function DayPlanCard({ day, editable = false, onUpdate }) {
 
           {day.planned_resources?.length > 0 && (
             <div>
-              <p className="text-xs font-semibold text-slate-400 mb-1.5">📋 Resources</p>
+              <p className="text-xs font-semibold text-secondary/70 mb-1.5">📋 Resources</p>
               <ul className="space-y-1">
                 {day.planned_resources.map((r, i) => (
-                  <li key={i} className="text-xs text-slate-400 flex items-start gap-1.5">
+                  <li key={i} className="text-xs text-secondary/70 flex items-start gap-1.5">
                     <span>{RESOURCE_ICONS[r.type] || '•'}</span>
                     <span>{r.detail}</span>
                   </li>
@@ -109,9 +109,9 @@ export default function DayPlanCard({ day, editable = false, onUpdate }) {
           )}
 
           {day.notes && (
-            <div className="bg-slate-800/60 rounded-lg px-3 py-2">
-              <p className="text-xs font-semibold text-slate-400 mb-1">Notes</p>
-              <p className="text-xs text-slate-400">{day.notes}</p>
+            <div className="bg-tan/60 rounded-lg px-3 py-2">
+              <p className="text-xs font-semibold text-secondary/70 mb-1">Notes</p>
+              <p className="text-xs text-secondary/70">{day.notes}</p>
             </div>
           )}
         </div>

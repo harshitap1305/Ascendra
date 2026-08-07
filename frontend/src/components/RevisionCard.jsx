@@ -49,23 +49,23 @@ export default function RevisionCard({ revision, examId }) {
             {isUrgent && (
               <span className="badge-high text-xs">⚡ Urgent</span>
             )}
-            <span className="text-xs text-slate-500 bg-slate-800 px-2 py-0.5 rounded-full">
+            <span className="text-xs text-secondary/70 bg-tan px-2 py-0.5 rounded-full">
               {revision.revision_label}
             </span>
             {isOverdue && (
               <span className="badge-high text-xs">{revision.days_overdue}d overdue</span>
             )}
           </div>
-          <h4 className="text-white font-semibold truncate">{revision.topic_name}</h4>
+          <h4 className="text-secondary font-semibold truncate">{revision.topic_name}</h4>
           {revision.module_name && (
-            <p className="text-slate-500 text-xs mt-0.5">{revision.module_name}</p>
+            <p className="text-secondary/70 text-xs mt-0.5">{revision.module_name}</p>
           )}
         </div>
         <div className="flex gap-2 shrink-0">
           <button
             onClick={() => skipMutation.mutate()}
             disabled={skipMutation.isPending}
-            className="text-slate-500 hover:text-slate-300 text-sm px-2 py-1 rounded transition-colors"
+            className="text-secondary/70 hover:text-secondary text-sm px-2 py-1 rounded transition-colors"
           >
             Skip
           </button>
@@ -81,8 +81,8 @@ export default function RevisionCard({ revision, examId }) {
 
       {/* Confidence rating form */}
       {showDoneForm && (
-        <div className="mt-3 pt-3 border-t border-slate-800">
-          <p className="text-slate-400 text-xs mb-2">How confident do you feel? (optional)</p>
+        <div className="mt-3 pt-3 border-t border-secondary">
+          <p className="text-secondary/70 text-xs mb-2">How confident do you feel? (optional)</p>
           <div className="flex gap-2 mb-3 flex-wrap">
             {[1, 2, 3, 4, 5].map(r => (
               <button
@@ -90,8 +90,8 @@ export default function RevisionCard({ revision, examId }) {
                 onClick={() => setRating(r === rating ? null : r)}
                 className={`flex flex-col items-center px-2 py-1.5 rounded-lg border text-xs transition-all ${
                   rating === r
-                    ? 'border-indigo-500 bg-indigo-500/20 text-white'
-                    : 'border-slate-700 text-slate-400 hover:border-slate-500'
+                    ? 'border-indigo-500 bg-indigo-500/20 text-secondary'
+                    : 'border-secondary text-secondary/70 hover:border-slate-500'
                 }`}
               >
                 <span className="text-base">{r === 1 ? '😕' : r === 2 ? '😐' : r === 3 ? '🙂' : r === 4 ? '😊' : '🎯'}</span>
@@ -111,9 +111,9 @@ export default function RevisionCard({ revision, examId }) {
 
       {/* Re-revision prompt — shown when user rates ≤ 2 */}
       {showReRevisionPrompt && (
-        <div className="mt-3 pt-3 border-t border-slate-800 bg-amber-500/10 rounded-lg p-3">
+        <div className="mt-3 pt-3 border-t border-secondary bg-amber-500/10 rounded-lg p-3">
           <p className="text-amber-400 text-sm font-medium">Still a bit shaky? 🤔</p>
-          <p className="text-slate-400 text-xs mt-1 mb-3">
+          <p className="text-secondary/70 text-xs mt-1 mb-3">
             You rated your confidence low. Would you like to schedule another revision for tomorrow?
           </p>
           <div className="flex gap-2">

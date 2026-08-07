@@ -17,7 +17,7 @@ const RESOURCE_LABELS = {
 export default function ResourceList({ resources }) {
   if (!resources || resources.length === 0) {
     return (
-      <p className="text-slate-500 text-sm italic">No resources extracted yet.</p>
+      <p className="text-secondary/70 text-sm italic">No resources extracted yet.</p>
     )
   }
 
@@ -32,16 +32,16 @@ export default function ResourceList({ resources }) {
     <div className="space-y-4">
       {Object.entries(grouped).map(([type, items]) => (
         <div key={type}>
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+          <p className="text-xs font-semibold text-secondary/70 uppercase tracking-wider mb-2">
             {RESOURCE_ICONS[type]} {RESOURCE_LABELS[type] || type}
           </p>
           <ul className="space-y-1.5">
             {items.map((r, i) => (
               <li key={i} className="flex items-start gap-3 text-sm">
                 <div className="flex-1 min-w-0">
-                  <span className="text-slate-200 font-medium">{r.title}</span>
+                  <span className="text-secondary font-medium">{r.title}</span>
                   {r.source_name && (
-                    <span className="text-slate-500 ml-2 text-xs">via {r.source_name}</span>
+                    <span className="text-secondary/70 ml-2 text-xs">via {r.source_name}</span>
                   )}
                   {r.total_units && (
                     <span className="ml-2 text-xs text-indigo-400/80 bg-indigo-500/10 border border-indigo-500/20 px-1.5 py-0.5 rounded font-mono">

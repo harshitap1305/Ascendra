@@ -12,11 +12,11 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null
   const d = payload[0]?.payload
   return (
-    <div className="bg-slate-900 border border-slate-700 rounded-lg p-3 text-xs shadow-xl max-w-48">
-      <p className="text-slate-200 font-semibold mb-1 truncate">{label}</p>
-      <p className="text-slate-400">Completion: <span className="text-slate-200">{d?.completion_pct?.toFixed(1)}%</span></p>
-      <p className="text-slate-400">Est. hours: <span className="text-slate-200">{d?.estimated_hours}h</span></p>
-      <p className="text-slate-400">Status: <span className="text-slate-200 capitalize">{d?.status?.replace('_', ' ')}</span></p>
+    <div className="bg-tan border border-secondary rounded-lg p-3 text-xs shadow-xl max-w-48">
+      <p className="text-secondary font-semibold mb-1 truncate">{label}</p>
+      <p className="text-secondary/70">Completion: <span className="text-secondary">{d?.completion_pct?.toFixed(1)}%</span></p>
+      <p className="text-secondary/70">Est. hours: <span className="text-secondary">{d?.estimated_hours}h</span></p>
+      <p className="text-secondary/70">Status: <span className="text-secondary capitalize">{d?.status?.replace('_', ' ')}</span></p>
     </div>
   )
 }
@@ -32,7 +32,7 @@ export default function TopicCompletionBarChart({ data = [] }) {
 
   return (
     <div className="card">
-      <h3 className="text-sm font-semibold text-slate-200 mb-4">Topic-wise Progress</h3>
+      <h3 className="text-sm font-semibold text-secondary mb-4">Topic-wise Progress</h3>
       <ResponsiveContainer width="100%" height={Math.max(160, data.length * 36)}>
         <BarChart
           data={data}
@@ -62,7 +62,7 @@ export default function TopicCompletionBarChart({ data = [] }) {
         </BarChart>
       </ResponsiveContainer>
       {/* Legend */}
-      <div className="flex gap-4 mt-3 justify-end text-xs text-slate-500">
+      <div className="flex gap-4 mt-3 justify-end text-xs text-secondary/70">
         <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />Completed</span>
         <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block" />In Progress</span>
         <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-600 inline-block" />Not Started</span>

@@ -16,10 +16,10 @@ const CustomTooltip = ({ active, payload, label }) => {
   const actual = payload.find(p => p.dataKey === 'actual')?.value ?? 0
   const delta = actual - planned
   return (
-    <div className="bg-slate-900 border border-slate-700 rounded-lg p-3 text-xs shadow-xl">
-      <p className="text-slate-300 font-medium mb-1">{label}</p>
-      <p className="text-slate-400">Planned: <span className="text-slate-200">{planned}h</span></p>
-      <p className="text-slate-400">Actual:  <span className="text-slate-200">{actual}h</span></p>
+    <div className="bg-tan border border-secondary rounded-lg p-3 text-xs shadow-xl">
+      <p className="text-secondary font-medium mb-1">{label}</p>
+      <p className="text-secondary/70">Planned: <span className="text-secondary">{planned}h</span></p>
+      <p className="text-secondary/70">Actual:  <span className="text-secondary">{actual}h</span></p>
       <p className={`font-semibold mt-1 ${delta >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
         {delta >= 0 ? '+' : ''}{delta.toFixed(1)}h vs plan
       </p>
@@ -44,16 +44,16 @@ export default function HoursTimelineChart({ data = [], onRangeChange }) {
   return (
     <div className="card">
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-        <h3 className="text-sm font-semibold text-slate-200">Hours Studied vs Planned</h3>
-        <div className="flex gap-1 bg-slate-800 rounded-lg p-0.5">
+        <h3 className="text-sm font-semibold text-secondary">Hours Studied vs Planned</h3>
+        <div className="flex gap-1 bg-tan rounded-lg p-0.5">
           {RANGE_OPTIONS.map((opt, i) => (
             <button
               key={opt.label}
               onClick={() => handleRange(i)}
               className={`px-3 py-1 text-xs rounded-md transition-all font-medium ${
                 selected === i
-                  ? 'bg-indigo-600 text-white'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-indigo-600 text-secondary'
+                  : 'text-secondary/70 hover:text-secondary'
               }`}
             >
               {opt.label}

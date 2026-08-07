@@ -30,33 +30,33 @@ export default function FeedbackCard({ feedback, planAdjusted, adjustmentSummary
           </span>
           <span className="flex items-center gap-1.5">
             <span className={`w-2 h-2 rounded-full ${RISK_DOT[feedback.risk_level] || 'bg-slate-500'}`} />
-            <span className="text-slate-500 text-xs capitalize">{feedback.risk_level} risk</span>
+            <span className="text-secondary/70 text-xs capitalize">{feedback.risk_level} risk</span>
           </span>
           {feedback.confidence_display && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-slate-700/60 text-slate-400">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-slate-700/60 text-secondary/70">
               Confidence {feedback.confidence_display}/5 — {CONFIDENCE_LABELS[feedback.confidence_display] || ''}
             </span>
           )}
         </div>
         {showDate && feedback.plan_date && (
-          <span className="text-slate-500 text-xs">
+          <span className="text-secondary/70 text-xs">
             {new Date(feedback.plan_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
           </span>
         )}
       </div>
 
       {/* Performance summary */}
-      <p className="text-white text-sm leading-relaxed">{feedback.performance_summary}</p>
+      <p className="text-secondary text-sm leading-relaxed">{feedback.performance_summary}</p>
 
       {/* Suggestions */}
       {feedback.suggestions?.length > 0 && (
         <div>
-          <p className="text-slate-500 text-xs uppercase tracking-wider font-medium mb-2">Suggestions</p>
+          <p className="text-secondary/70 text-xs uppercase tracking-wider font-medium mb-2">Suggestions</p>
           <ul className="space-y-1.5">
             {feedback.suggestions.map((s, i) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="text-indigo-400 text-xs mt-0.5 shrink-0">→</span>
-                <span className="text-slate-300 text-sm">{s}</span>
+                <span className="text-secondary text-sm">{s}</span>
               </li>
             ))}
           </ul>
@@ -65,7 +65,7 @@ export default function FeedbackCard({ feedback, planAdjusted, adjustmentSummary
 
       {/* Motivational note */}
       {feedback.motivational_note && (
-        <p className="text-slate-400 text-sm italic border-t border-slate-700 pt-3">
+        <p className="text-secondary/70 text-sm italic border-t border-secondary pt-3">
           "{feedback.motivational_note}"
         </p>
       )}

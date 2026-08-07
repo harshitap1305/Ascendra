@@ -60,24 +60,24 @@ export default function ReadinessGauge({ score = 0, breakdown = {} }) {
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-end pb-1">
-          <span className="text-3xl font-bold text-white">{score}</span>
+          <span className="text-3xl font-bold text-secondary">{score}</span>
           <span className="text-xs font-semibold" style={{ color }}>{arcLabel(score)}</span>
         </div>
       </div>
 
       {/* Weight breakdown — shown to user */}
-      <div className="w-full border-t border-slate-800 pt-3">
-        <p className="text-slate-500 text-xs text-center mb-2">Score breakdown</p>
+      <div className="w-full border-t border-secondary pt-3">
+        <p className="text-secondary/70 text-xs text-center mb-2">Score breakdown</p>
         <div className="grid grid-cols-2 gap-1.5">
           {components.map(c => (
             <div key={c.key} className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: c.color }} />
               <div className="min-w-0">
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-400 truncate">{c.label}</span>
-                  <span className="text-slate-300 font-medium ml-1">{c.weight}</span>
+                  <span className="text-secondary/70 truncate">{c.label}</span>
+                  <span className="text-secondary font-medium ml-1">{c.weight}</span>
                 </div>
-                <div className="h-1 bg-slate-800 rounded-full mt-0.5 overflow-hidden">
+                <div className="h-1 bg-tan rounded-full mt-0.5 overflow-hidden">
                   <div
                     className="h-full rounded-full transition-all duration-700"
                     style={{ width: `${c.val}%`, background: c.color }}

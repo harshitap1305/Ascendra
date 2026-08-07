@@ -1,59 +1,72 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #810B38;
+  --color-secondary: #541A1A;
+  --color-cream: #F1E2D1;
+  --color-tan: #DCC3AA;
+}
+
 @layer base {
   * {
     box-sizing: border-box;
   }
 
   body {
-    @apply bg-slate-950 text-slate-100 font-sans antialiased;
+    /* Cream background, Dark Maroon text */
+    @apply bg-cream text-secondary font-sans antialiased;
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-slate-900;
+    @apply bg-cream border-l-2 border-secondary;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-700 rounded-full;
+    @apply bg-primary border-2 border-secondary;
   }
 }
 
 @layer components {
+  /* Neobrutalist components */
   .btn-primary {
-    @apply bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-4 py-2 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-primary text-cream font-bold px-5 py-2.5 rounded-lg border-2 border-secondary shadow-[4px_4px_0px_#541A1A] transition-all duration-100 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#541A1A] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none disabled:opacity-50 disabled:pointer-events-none;
   }
 
   .btn-secondary {
-    @apply bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold px-4 py-2 rounded-lg border border-slate-700 transition-all duration-200;
+    @apply bg-tan text-secondary font-bold px-5 py-2.5 rounded-lg border-2 border-secondary shadow-[4px_4px_0px_#541A1A] transition-all duration-100 hover:bg-[#cbb195] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#541A1A] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none;
   }
 
   .btn-danger {
-    @apply bg-red-600/20 hover:bg-red-600/30 text-red-400 font-semibold px-4 py-2 rounded-lg border border-red-600/30 transition-all duration-200;
+    @apply bg-red-400 text-secondary font-bold px-5 py-2.5 rounded-lg border-2 border-secondary shadow-[4px_4px_0px_#541A1A] transition-all duration-100 hover:bg-red-500 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#541A1A] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none;
   }
 
   .card {
-    @apply bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-lg;
+    @apply bg-tan border-3 border-secondary rounded-xl p-6 shadow-[6px_6px_0px_#541A1A];
+  }
+  
+  .card-hover {
+    @apply bg-tan border-3 border-secondary rounded-xl p-6 shadow-[6px_6px_0px_#541A1A] transition-transform duration-100 hover:-translate-y-1 hover:shadow-[8px_8px_0px_#541A1A];
   }
 
   .input {
-    @apply w-full bg-slate-800 border border-slate-700 text-slate-100 placeholder-slate-500 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200;
+    @apply w-full bg-cream border-2 border-secondary text-secondary placeholder-[#a5846c] font-medium rounded-lg px-4 py-2.5 shadow-[3px_3px_0px_#541A1A] focus:outline-none focus:translate-x-[1px] focus:translate-y-[1px] focus:shadow-[2px_2px_0px_#541A1A] transition-all;
   }
 
   .label {
-    @apply block text-sm font-medium text-slate-300 mb-1.5;
+    @apply block text-sm font-bold text-secondary mb-1.5 uppercase tracking-wide;
   }
 
   .badge-low {
-    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-500/20 text-emerald-400 border border-emerald-500/30;
+    @apply inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-green-300 text-secondary border-2 border-secondary shadow-[2px_2px_0px_#541A1A];
   }
 
   .badge-medium {
-    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-500/20 text-amber-400 border border-amber-500/30;
+    @apply inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-yellow-300 text-secondary border-2 border-secondary shadow-[2px_2px_0px_#541A1A];
   }
 
   .badge-high {
-    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-500/20 text-red-400 border border-red-500/30;
+    @apply inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-red-400 text-secondary border-2 border-secondary shadow-[2px_2px_0px_#541A1A];
   }
 }

@@ -45,9 +45,9 @@ export default function StudyCalendarHeatmap({ dailyHours = {} }) {
   return (
     <div className="card">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-slate-200">Study Calendar</h3>
+        <h3 className="text-sm font-semibold text-secondary">Study Calendar</h3>
         {/* Intensity legend */}
-        <div className="flex items-center gap-1.5 text-xs text-slate-500">
+        <div className="flex items-center gap-1.5 text-xs text-secondary/70">
           <span>Less</span>
           {['#1e293b', '#312e81', '#4338ca', '#6366f1', '#818cf8'].map((c, i) => (
             <div key={i} style={{ background: c, width: 11, height: 11, borderRadius: 2 }} />

@@ -80,9 +80,9 @@ export default function ModuleStartPage() {
     <AppLayout>
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <p className="text-slate-500 text-sm mb-1">{exam?.name}</p>
-          <h1 className="text-2xl font-bold text-white">Start a Module</h1>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-secondary/70 text-sm mb-1">{exam?.name}</p>
+          <h1 className="text-2xl font-bold text-secondary">Start a Module</h1>
+          <p className="text-secondary/70 text-sm mt-1">
             Pick a topic and describe your resources. AI will build a day-by-day plan.
           </p>
         </div>
@@ -91,8 +91,8 @@ export default function ModuleStartPage() {
           <div className="card flex flex-col items-center py-20 gap-5">
             <div className="w-14 h-14 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
             <div className="text-center">
-              <p className="text-white font-semibold text-lg">Building your plan…</p>
-              <p className="text-slate-400 text-sm mt-1">
+              <p className="text-secondary font-semibold text-lg">Building your plan…</p>
+              <p className="text-secondary/70 text-sm mt-1">
                 AI is parsing your resources and planning day by day
               </p>
               <p className="text-slate-600 text-xs mt-2">This usually takes 15–30 seconds</p>
@@ -102,7 +102,7 @@ export default function ModuleStartPage() {
           <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left: Topic selection */}
             <div className="card">
-              <h2 className="font-semibold text-white mb-1">
+              <h2 className="font-semibold text-secondary mb-1">
                 Select Topic
                 {selectedTopic && (
                   <span className="ml-2 text-sm text-indigo-400 font-normal">
@@ -110,7 +110,7 @@ export default function ModuleStartPage() {
                   </span>
                 )}
               </h2>
-              <p className="text-xs text-slate-500 mb-4">Click any topic to select it</p>
+              <p className="text-xs text-secondary/70 mb-4">Click any topic to select it</p>
 
               {topics && topics.length > 0 ? (
                 <div className="max-h-80 overflow-y-auto pr-1">
@@ -121,13 +121,13 @@ export default function ModuleStartPage() {
                   />
                 </div>
               ) : (
-                <p className="text-slate-500 text-sm">No topics yet — add a syllabus first.</p>
+                <p className="text-secondary/70 text-sm">No topics yet — add a syllabus first.</p>
               )}
             </div>
 
             {/* Right: Input form */}
             <div className="card space-y-5">
-              <h2 className="font-semibold text-white">Your Plan</h2>
+              <h2 className="font-semibold text-secondary">Your Plan</h2>
 
               {error && (
                 <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg px-4 py-3">
@@ -145,7 +145,7 @@ export default function ModuleStartPage() {
                   onChange={(e) => setRawInput(e.target.value)}
                   required
                 />
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-secondary/70 mt-1">
                   Just write naturally — AI will extract and structure everything.
                 </p>
               </div>
@@ -216,14 +216,14 @@ function SelectableNode({ topic, selectedId, onSelect, depth }) {
         className={`flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer text-sm transition-all
           ${isSelected
             ? 'bg-indigo-600/20 border border-indigo-500/40 text-indigo-300'
-            : 'hover:bg-slate-800/60 text-slate-300 border border-transparent'
+            : 'hover:bg-tan/60 text-secondary border border-transparent'
           }`}
         style={{ paddingLeft: `${8 + depth * 16}px` }}
         onClick={() => onSelect(topic)}
       >
         {hasChildren && (
           <button
-            className="text-slate-500 hover:text-slate-300 shrink-0 w-3"
+            className="text-secondary/70 hover:text-secondary shrink-0 w-3"
             onClick={(e) => { e.stopPropagation(); setExpanded(!expanded) }}
           >
             {expanded ? '▼' : '▶'}

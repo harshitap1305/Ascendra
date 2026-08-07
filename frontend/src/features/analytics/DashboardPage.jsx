@@ -77,7 +77,7 @@ export default function DashboardPage() {
     return acc
   }, {})
 
-  const paceColor = tl?.on_track === true ? 'text-emerald-400' : tl?.on_track === false ? 'text-red-400' : 'text-slate-400'
+  const paceColor = tl?.on_track === true ? 'text-emerald-400' : tl?.on_track === false ? 'text-red-400' : 'text-secondary/70'
 
   return (
     <AppLayout>
@@ -85,10 +85,10 @@ export default function DashboardPage() {
         {/* Header */}
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white">{overall?.exam_name ?? 'Dashboard'}</h1>
+            <h1 className="text-2xl font-bold text-secondary">{overall?.exam_name ?? 'Dashboard'}</h1>
             <div className="flex items-center gap-3 mt-1 flex-wrap">
               {tl?.days_remaining != null && (
-                <span className={`text-sm font-medium ${tl.days_remaining < 30 ? 'text-red-400' : 'text-slate-400'}`}>
+                <span className={`text-sm font-medium ${tl.days_remaining < 30 ? 'text-red-400' : 'text-secondary/70'}`}>
                   🗓 {tl.days_remaining} days until exam
                 </span>
               )}
@@ -106,7 +106,7 @@ export default function DashboardPage() {
                 className="btn-secondary text-sm relative"
               >
                 🔄 Revisions
-                <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-secondary text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold">
                   {dp.revision_queue_count}
                 </span>
               </Link>
@@ -181,14 +181,14 @@ export default function DashboardPage() {
           <div className="card flex items-center gap-5">
             <div className="relative shrink-0">
               <ProgressRing pct={dp.active_module.module_completion_pct} />
-              <div className="absolute inset-0 flex items-center justify-center text-xs font-bold text-white">
+              <div className="absolute inset-0 flex items-center justify-center text-xs font-bold text-secondary">
                 {Math.round(dp.active_module.module_completion_pct)}%
               </div>
             </div>
             <div className="min-w-0">
-              <p className="text-slate-400 text-xs uppercase tracking-wide mb-0.5">Current Module</p>
-              <h3 className="text-white font-semibold truncate">{dp.active_module.topic_name}</h3>
-              <p className="text-slate-500 text-sm">{dp.active_module.total_days}-day plan · {dp.active_module.status}</p>
+              <p className="text-secondary/70 text-xs uppercase tracking-wide mb-0.5">Current Module</p>
+              <h3 className="text-secondary font-semibold truncate">{dp.active_module.topic_name}</h3>
+              <p className="text-secondary/70 text-sm">{dp.active_module.total_days}-day plan · {dp.active_module.status}</p>
             </div>
           </div>
         )}
@@ -203,7 +203,7 @@ export default function DashboardPage() {
         {revisionQueue.length > 0 && (
           <div className="card">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-slate-200">
+              <h3 className="text-sm font-semibold text-secondary">
                 🔄 Revisions Due ({revisionQueue.length})
               </h3>
               <Link
@@ -215,10 +215,10 @@ export default function DashboardPage() {
             </div>
             <div className="space-y-2">
               {revisionQueue.slice(0, 3).map(r => (
-                <div key={r.id} className="flex items-center justify-between py-2 border-b border-slate-800 last:border-0">
+                <div key={r.id} className="flex items-center justify-between py-2 border-b border-secondary last:border-0">
                   <div>
-                    <span className="text-white text-sm font-medium">{r.topic_name}</span>
-                    <span className="text-slate-500 text-xs ml-2">{r.revision_label}</span>
+                    <span className="text-secondary text-sm font-medium">{r.topic_name}</span>
+                    <span className="text-secondary/70 text-xs ml-2">{r.revision_label}</span>
                   </div>
                   {r.days_overdue > 0 && (
                     <span className="badge-high text-xs">{r.days_overdue}d overdue</span>
@@ -233,7 +233,7 @@ export default function DashboardPage() {
         {dp?.recent_feedback?.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-slate-200">Recent Check-in Feedback</h3>
+              <h3 className="text-sm font-semibold text-secondary">Recent Check-in Feedback</h3>
               <Link
                 to={`/exams/${examId}/feedback`}
                 className="text-indigo-400 hover:text-indigo-300 text-xs"
@@ -258,9 +258,9 @@ export default function DashboardPage() {
           }`}>
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-lg">{tl.on_track ? '✅' : '⏳'}</span>
-              <span className="text-slate-300">
+              <span className="text-secondary">
                 At your current pace ({perf?.avg_daily_hours_14d ?? '?'}h/day), you'll finish on{' '}
-                <span className="font-semibold text-white">{tl.projected_finish_date}</span>
+                <span className="font-semibold text-secondary">{tl.projected_finish_date}</span>
                 {tl.on_track
                   ? ` — ${tl.days_remaining} days before exam.`
                   : ` — you need ${tl.required_daily_hours}h/day to finish on time.`}

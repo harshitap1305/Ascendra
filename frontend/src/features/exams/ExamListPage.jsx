@@ -14,8 +14,8 @@ export default function ExamListPage() {
     <AppLayout>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white">My Exams</h1>
-          <p className="text-slate-400 text-sm mt-1">Track your preparation across all exams</p>
+          <h1 className="text-2xl font-bold text-secondary">My Exams</h1>
+          <p className="text-secondary/70 text-sm mt-1">Track your preparation across all exams</p>
         </div>
         <Link to="/exams/new" id="create-exam-btn" className="btn-primary">
           + New Exam
@@ -25,13 +25,13 @@ export default function ExamListPage() {
       {isLoading && (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="card h-44 animate-pulse bg-slate-900" />
+            <div key={i} className="card h-44 animate-pulse bg-tan" />
           ))}
         </div>
       )}
 
       {isError && (
-        <div className="card text-center py-12 text-slate-400">
+        <div className="card text-center py-12 text-secondary/70">
           Failed to load exams. Please refresh.
         </div>
       )}
@@ -39,8 +39,8 @@ export default function ExamListPage() {
       {data?.length === 0 && (
         <div className="card text-center py-20">
           <p className="text-4xl mb-4">📚</p>
-          <p className="text-slate-300 font-medium text-lg">No exams yet</p>
-          <p className="text-slate-500 text-sm mt-1 mb-6">Create your first exam to get started</p>
+          <p className="text-secondary font-medium text-lg">No exams yet</p>
+          <p className="text-secondary/70 text-sm mt-1 mb-6">Create your first exam to get started</p>
           <Link to="/exams/new" className="btn-primary inline-block">
             Create Exam
           </Link>

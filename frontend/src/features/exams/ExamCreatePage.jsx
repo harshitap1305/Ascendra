@@ -82,10 +82,10 @@ export default function ExamCreatePage() {
           {STEPS.map((s, i) => (
             <div key={s} className="flex items-center gap-2">
               <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold
-                ${i === step ? 'bg-indigo-600 text-white' : i < step ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-500'}`}>
+                ${i === step ? 'bg-indigo-600 text-secondary' : i < step ? 'bg-emerald-600 text-secondary' : 'bg-tan text-secondary/70'}`}>
                 {i < step ? '✓' : i + 1}
               </div>
-              <span className={`text-sm font-medium ${i === step ? 'text-white' : 'text-slate-500'}`}>{s}</span>
+              <span className={`text-sm font-medium ${i === step ? 'text-secondary' : 'text-secondary/70'}`}>{s}</span>
               {i < STEPS.length - 1 && <div className="w-8 h-px bg-slate-700 ml-1" />}
             </div>
           ))}
@@ -94,7 +94,7 @@ export default function ExamCreatePage() {
         {/* Step 1: Exam details */}
         {step === 0 && (
           <div className="card space-y-5">
-            <h2 className="text-lg font-semibold text-white">Exam Details</h2>
+            <h2 className="text-lg font-semibold text-secondary">Exam Details</h2>
 
             {createMutation.isError && (
               <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg px-4 py-3">
@@ -159,8 +159,8 @@ export default function ExamCreatePage() {
         {step === 1 && (
           <div className="card space-y-5">
             <div>
-              <h2 className="text-lg font-semibold text-white">Paste Your Syllabus</h2>
-              <p className="text-sm text-slate-400 mt-1">
+              <h2 className="text-lg font-semibold text-secondary">Paste Your Syllabus</h2>
+              <p className="text-sm text-secondary/70 mt-1">
                 Paste raw syllabus text — copy-pasted from PDF is fine. AI will structure it.
               </p>
             </div>
@@ -174,7 +174,7 @@ export default function ExamCreatePage() {
             {parsing ? (
               <div className="py-16 flex flex-col items-center gap-4">
                 <div className="w-10 h-10 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-                <p className="text-slate-400 text-sm">AI is parsing your syllabus…</p>
+                <p className="text-secondary/70 text-sm">AI is parsing your syllabus…</p>
                 <p className="text-slate-600 text-xs">This usually takes 10–30 seconds</p>
               </div>
             ) : (

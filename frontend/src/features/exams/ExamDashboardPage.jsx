@@ -40,10 +40,10 @@ export default function ExamDashboardPage() {
       {/* Header */}
       <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
         <div>
-          <p className="text-slate-500 text-sm mb-1">Exam</p>
-          <h1 className="text-2xl font-bold text-white">{exam?.name || '…'}</h1>
+          <p className="text-secondary/70 text-sm mb-1">Exam</p>
+          <h1 className="text-2xl font-bold text-secondary">{exam?.name || '…'}</h1>
           {exam?.goal_score && (
-            <p className="text-slate-400 text-sm mt-1">Goal: {exam.goal_score}</p>
+            <p className="text-secondary/70 text-sm mt-1">Goal: {exam.goal_score}</p>
           )}
         </div>
         <div className="flex gap-3">
@@ -85,11 +85,11 @@ export default function ExamDashboardPage() {
       {summary && (
         <div className="card mb-6">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-medium text-slate-300">Overall Progress</span>
+            <span className="text-sm font-medium text-secondary">Overall Progress</span>
             <span className="text-sm font-bold text-indigo-400">{summary.progress_pct}%</span>
           </div>
           <ProgressBar pct={summary.progress_pct} />
-          <div className="flex gap-6 mt-3 text-xs text-slate-500">
+          <div className="flex gap-6 mt-3 text-xs text-secondary/70">
             <span>{summary.completed_leaf_topics} / {summary.total_leaf_topics} topics completed</span>
           </div>
         </div>
@@ -97,15 +97,15 @@ export default function ExamDashboardPage() {
 
       {/* Topic tree */}
       <div className="card">
-        <h2 className="font-semibold text-white mb-4">Syllabus</h2>
+        <h2 className="font-semibold text-secondary mb-4">Syllabus</h2>
         {topicsLoading ? (
           <div className="space-y-2">
             {[...Array(5)].map((_, i) => (
-              <div key={i} className="h-8 bg-slate-800 rounded animate-pulse" style={{ width: `${70 + i * 5}%` }} />
+              <div key={i} className="h-8 bg-tan rounded animate-pulse" style={{ width: `${70 + i * 5}%` }} />
             ))}
           </div>
         ) : topics?.length === 0 ? (
-          <div className="text-center py-10 text-slate-400">
+          <div className="text-center py-10 text-secondary/70">
             <p className="mb-3">No topics yet.</p>
             <button onClick={() => navigate(`/exams/${examId}/syllabus`)} className="btn-primary text-sm">
               Add Syllabus

@@ -50,8 +50,8 @@ export default function CheckinPage() {
     <AppLayout>
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-white">End-of-Day Check-in</h1>
-          <p className="text-slate-400 text-sm mt-1">
+          <h1 className="text-2xl font-bold text-secondary">End-of-Day Check-in</h1>
+          <p className="text-secondary/70 text-sm mt-1">
             Write freely — what did you study today? Mention tasks, questions solved, videos watched, any issues.
           </p>
         </div>
@@ -64,12 +64,12 @@ export default function CheckinPage() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="e.g. Today I watched Gate Smashers videos 4-6 on Semaphores. Solved about 20 PYQs but couldn't finish the Deadlock chapter — got distracted with college work. Feeling okay about Processes overall."
-                className="w-full bg-transparent text-white text-sm placeholder-slate-600 resize-none focus:outline-none leading-relaxed"
+                className="w-full bg-transparent text-secondary text-sm placeholder-slate-600 resize-none focus:outline-none leading-relaxed"
                 rows={8}
                 disabled={isLoading}
               />
-              <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-700">
-                <span className={`text-xs ${charCount < 10 ? 'text-slate-600' : 'text-slate-400'}`}>
+              <div className="flex items-center justify-between mt-3 pt-3 border-t border-secondary">
+                <span className={`text-xs ${charCount < 10 ? 'text-slate-600' : 'text-secondary/70'}`}>
                   {charCount} chars {charCount < 10 ? `(${10 - charCount} more to enable)` : ''}
                 </span>
                 {isLoading && (

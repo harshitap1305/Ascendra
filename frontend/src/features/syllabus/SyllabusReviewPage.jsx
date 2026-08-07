@@ -82,11 +82,11 @@ export default function SyllabusReviewPage() {
     <AppLayout>
       <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
         <div>
-          <p className="text-slate-500 text-sm mb-1">
+          <p className="text-secondary/70 text-sm mb-1">
             {exam ? `${exam.name} • Syllabus Review` : 'Syllabus Review'}
           </p>
-          <h1 className="text-2xl font-bold text-white">Review & Edit Topic Tree</h1>
-          <p className="text-slate-400 text-sm mt-1">
+          <h1 className="text-2xl font-bold text-secondary">Review & Edit Topic Tree</h1>
+          <p className="text-secondary/70 text-sm mt-1">
             Review the structure AI generated. Edit titles or remove extra nodes before enriching with difficulty and study time estimation.
           </p>
         </div>
@@ -115,7 +115,7 @@ export default function SyllabusReviewPage() {
           {[...Array(6)].map((_, i) => (
             <div
               key={i}
-              className="h-8 bg-slate-800 rounded animate-pulse"
+              className="h-8 bg-tan rounded animate-pulse"
               style={{ width: `${65 + (i % 3) * 10}%` }}
             />
           ))}
@@ -124,8 +124,8 @@ export default function SyllabusReviewPage() {
         <div className="card space-y-5">
           <div className="text-center py-6">
             <p className="text-3xl mb-2">📋</p>
-            <h3 className="text-lg font-medium text-white">No Syllabus Uploaded Yet</h3>
-            <p className="text-slate-400 text-sm mt-1 max-w-md mx-auto">
+            <h3 className="text-lg font-medium text-secondary">No Syllabus Uploaded Yet</h3>
+            <p className="text-secondary/70 text-sm mt-1 max-w-md mx-auto">
               Paste your exam syllabus below and let our AI structure it into topics, subtopics, and chapters automatically.
             </p>
           </div>
@@ -139,7 +139,7 @@ export default function SyllabusReviewPage() {
           {parsing ? (
             <div className="py-12 flex flex-col items-center gap-4">
               <div className="w-10 h-10 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-              <p className="text-slate-400 text-sm">AI is analyzing and organizing your syllabus…</p>
+              <p className="text-secondary/70 text-sm">AI is analyzing and organizing your syllabus…</p>
               <p className="text-slate-600 text-xs">This usually takes 10–30 seconds</p>
             </div>
           ) : (
@@ -162,11 +162,11 @@ export default function SyllabusReviewPage() {
         </div>
       ) : (
         <div className="card">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
-            <span className="text-sm font-semibold text-slate-300">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-secondary">
+            <span className="text-sm font-semibold text-secondary">
               Interactive Outline (Click to expand/collapse, hover to edit)
             </span>
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-secondary/70">
               Changes save instantly
             </span>
           </div>
