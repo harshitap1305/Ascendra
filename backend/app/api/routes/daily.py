@@ -106,7 +106,7 @@ async def submit_checkin(daily_plan_id: str, body: CheckinRequest, user: Current
     """
     plan = await _get_owned_daily_plan(daily_plan_id, user)
 
-    if plan.status in ("completed",):
+    if plan.status in ("completed", "partially_completed"):
         report = await DailyReport.find_one({"daily_plan_id": plan.id})
         if report:
             fb = await Feedback.find_one({"daily_report_id": report.id})

@@ -93,7 +93,7 @@ export default function TodayPage() {
     )
   }
 
-  const isCompleted = plan.status === 'completed'
+  const isCompleted = plan.status === 'completed' || plan.status === 'partially_completed'
   const isSkipped = plan.status === 'skipped'
   const allTasks = [...(plan.carry_over_tasks || []), ...(plan.tasks || [])]
   const grouped = groupByType(allTasks)
